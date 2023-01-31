@@ -4,8 +4,7 @@ const drawer = ref(true);
 
 <template>
   <v-app>
-    <v-navigation-drawer v-model="drawer"> </v-navigation-drawer>
-
+    <navigation-drawer v-model="drawer" />
     <v-app-bar>
       <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
