@@ -1,5 +1,5 @@
 export const useDrawer = defineStore("drawer", () => {
-  const drawer = ref(true);
+  const rail = ref(false);
 
-  return { drawer };
+  return { rail };
 });
