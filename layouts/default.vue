@@ -1,10 +1,6 @@
-<script lang="ts" setup>
-const drawer = ref(true);
-</script>
-
 <template>
   <v-app>
-    <navigation-drawer v-model="drawer" />
+    <navigation-drawer />
     <app-bar />
     <v-main>
       <v-container fluid>
