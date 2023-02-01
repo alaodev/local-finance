@@ -1,15 +1,15 @@
 <script lang="ts" setup>
 const store = useDrawer();
 
-const { rail } = storeToRefs(store);
+const { drawer, items } = storeToRefs(store);
 
 const drawerStateIcon = computed(() =>
-  rail.value ? "mdi-circle-outline" : "mdi-record-circle-outline"
+  drawer.value ? "mdi-circle-outline" : "mdi-record-circle-outline"
 );
 </script>
 
 <template>
-  <v-navigation-drawer :rail="rail" expand-on-hover>
+  <v-navigation-drawer :rail="drawer" expand-on-hover>
     <v-list>
       <v-list-item>
         <template v-slot:prepend>
@@ -19,9 +19,11 @@ const drawerStateIcon = computed(() =>
           <span>LOCAL FINANCES</span>
         </template>
         <template v-slot:append>
-          <v-icon @click="rail = !rail" :icon="drawerStateIcon" />
+          <v-icon @click="drawer = !drawer" :icon="drawerStateIcon" />
         </template>
       </v-list-item>
     </v-list>
+    <v-divider />
+    <v-list :items="items"></v-list>
   </v-navigation-drawer>
 </template>
