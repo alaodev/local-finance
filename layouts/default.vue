@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-const store = useTheme();
+const themeStore = useTheme();
 
-const { theme } = storeToRefs(store);
+const { theme } = storeToRefs(themeStore);
 </script>
 
 <template>

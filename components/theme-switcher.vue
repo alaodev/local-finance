@@ -1,8 +1,8 @@
 <script lang="ts" setup>
-const store = useTheme();
+const themeStore = useTheme();
 
-const { theme } = storeToRefs(store);
-const { switchTheme } = store;
+const { theme } = storeToRefs(themeStore);
+const { switchTheme } = themeStore;
 
 const themeStateIcon = computed(() =>
   theme.value === "light" ? "mdi-weather-night" : "mdi-weather-sunny"
