@@ -1,5 +1,7 @@
+import { useStorage } from "@vueuse/core";
+
 export const useTheme = defineStore("theme", () => {
-  const theme = ref("light");
+  const theme = useStorage("vue-storage-theme", "light");
 
   function switchTheme() {
     if (theme.value === "light") {
