@@ -9,5 +9,7 @@ const capitalizedRouteName = computed(() => capitalize(route.name as string));
 <template>
   <v-app-bar>
     <v-toolbar-title>{{ capitalizedRouteName }}</v-toolbar-title>
+    <v-spacer />
+    <theme-switcher />
   </v-app-bar>
 </template>

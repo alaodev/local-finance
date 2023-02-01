@@ -1,5 +1,11 @@
+<script lang="ts" setup>
+const store = useTheme();
+
+const { theme } = storeToRefs(store);
+</script>
+
 <template>
-  <v-app>
+  <v-app :theme="theme">
     <navigation-drawer />
     <app-bar />
     <v-main>
