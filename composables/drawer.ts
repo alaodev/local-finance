@@ -1,5 +1,7 @@
+import { useStorage } from "@vueuse/core";
+
 export const useDrawer = defineStore("drawer", () => {
-  const drawer = ref(false);
+  const drawer = useStorage("vue-storage-drawer", false);
   const items = ref([
     {
       props: {
