@@ -4,10 +4,10 @@ export default {
     flat: true,
   },
   VBtn: {
-    variant: "outlined",
+    variant: "tonal",
   },
   VCard: {
-    variant: "outlined",
+    variant: "flat",
   },
   VTextField: {
     clearable: true,
