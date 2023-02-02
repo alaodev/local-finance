@@ -23,14 +23,11 @@ function handleCreateWallet() {
   </v-row>
   <v-row>
     <v-col>
-      <v-card
-        class="mx-auto px-6 py-8"
-        max-width="700"
-        title="Create your wallet"
-      >
-        <v-card-item>
+      <v-card class="mx-auto px-6 py-8" max-width="700">
+        <v-card-title class="mb-5"> Create your wallet </v-card-title>
+        <v-card-text>
           <wallet-form ref="form" />
-        </v-card-item>
+        </v-card-text>
         <v-card-actions>
           <v-spacer />
           <v-btn @click="handleCreateWallet">CREATE</v-btn>
