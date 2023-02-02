@@ -36,11 +36,7 @@ function validate(): WalletType | Boolean {
   <v-form>
     <v-row>
       <v-col cols="12">
-        <v-text-field
-          v-model="name"
-          :error="nameError"
-          :label="'Wallet name'"
-        />
+        <text-input v-model="name" :error="nameError" :label="'Wallet name'" />
       </v-col>
     </v-row>
     <v-row>
