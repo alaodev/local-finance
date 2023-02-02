@@ -18,7 +18,7 @@ function handleCreateWallet() {
 <template>
   <v-row>
     <v-col>
-      <v-btn icon="mdi-arrow-left" to="/wallets" />
+      <v-btn icon="mdi-arrow-left" to="/wallets/" />
     </v-col>
   </v-row>
   <v-row>
