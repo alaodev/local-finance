@@ -40,17 +40,12 @@ function validate(): WalletType | Boolean {
           v-model="name"
           :error="nameError"
           :label="'Wallet name'"
-          hide-details
         />
       </v-col>
     </v-row>
     <v-row>
       <v-col cols="12">
-        <v-text-field
-          v-model.number="goal"
-          :label="'Set a goal'"
-          hide-details
-        />
+        <v-text-field v-model.number="goal" :label="'Set a goal'" />
       </v-col>
     </v-row>
   </v-form>
