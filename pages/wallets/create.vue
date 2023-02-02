@@ -23,7 +23,7 @@ function handleCreateWallet() {
   </v-row>
   <v-row>
     <v-col>
-      <v-card class="mx-auto px-6 py-8" max-width="700">
+      <v-card class="mx-auto pa-6" max-width="700">
         <v-card-title class="mb-5"> Create your wallet </v-card-title>
         <v-card-text>
           <wallet-form ref="form" />

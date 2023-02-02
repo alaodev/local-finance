@@ -24,6 +24,6 @@ const drawerStateIcon = computed(() =>
       </v-list-item>
     </v-list>
     <v-divider />
-    <v-list :items="items"></v-list>
+    <v-list :items="items" density="compact" nav></v-list>
   </v-navigation-drawer>
 </template>
