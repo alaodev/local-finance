@@ -41,7 +41,7 @@ function validate(): WalletType | Boolean {
     </v-row>
     <v-row>
       <v-col cols="12">
-        <v-text-field v-model.number="goal" :label="'Set a goal'" />
+        <currency-input v-model="goal" :label="'Set a goal'" />
       </v-col>
     </v-row>
   </v-form>
