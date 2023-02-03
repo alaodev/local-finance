@@ -3,6 +3,9 @@ import { useStorage } from "@vueuse/core";
 export const useDrawer = defineStore("drawer", () => {
   const { t } = useI18n();
 
+  const dashboardTitle = computed(() => t("drawer.dashboard.title"));
+  const walletsTitle = computed(() => t("drawer.wallets.title"));
+
   const drawer = useStorage("vue-storage-drawer", false);
   const items = ref([
     {
@@ -10,7 +13,7 @@ export const useDrawer = defineStore("drawer", () => {
         prependIcon: "mdi-view-dashboard",
         to: "/dashboard",
       },
-      title: t("drawer.dashboard.title"),
+      title: dashboardTitle,
       value: "dashboard",
     },
     {
@@ -18,7 +21,7 @@ export const useDrawer = defineStore("drawer", () => {
         prependIcon: "mdi-wallet ",
         to: "/wallets",
       },
-      title: t("drawer.wallets.title"),
+      title: walletsTitle,
       value: "walltes",
       to: "/walltes",
     },
