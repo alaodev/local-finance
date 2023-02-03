@@ -60,9 +60,13 @@ const goalPercentage = computed(() => {
       </v-col>
     </v-row>
     <v-row>
-      <v-col v-if="props.goal">
+      <v-col>
         <span>{{ $t("pages.wallets.index.wallet-card.goal-text") }}</span>
-        <strong>{{ currency(props.goal, locale) }}</strong>
+        <strong>{{
+          props.goal
+            ? currency(props.goal, locale)
+            : $t("pages.wallets.index.wallet-card.goal-not-defined")
+        }}</strong>
       </v-col>
     </v-row>
     <v-row>

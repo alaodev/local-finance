@@ -15,6 +15,7 @@
                 "wallet-card": {
                     "money-header": "Reserved money",
                     "goal-text": "Goal to achieve: ",
+                    "goal-not-defined": "Not defined",
                     "btn-group": {
                         "reserve": "Reserve",
                         "withdraw": "Withdraw"
