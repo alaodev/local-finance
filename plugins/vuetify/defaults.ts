@@ -9,6 +9,9 @@ export default {
   VCard: {
     variant: "flat",
   },
+  VSheet: {
+    rounded: true,
+  },
   VTextField: {
     clearable: true,
     hideDetails: true,

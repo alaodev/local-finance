@@ -1,3 +1,11 @@
+<script lang="ts" setup>
+import WalletCard from "~~/pages/wallets/wallet-card.vue";
+
+const walletsStore = useWallets();
+
+const { wallets } = storeToRefs(walletsStore);
+</script>
+
 <template>
   <v-row>
     <v-col class="d-flex" cols="12">
@@ -5,6 +13,11 @@
       <v-btn to="/wallets/create">{{
         $t("pages.wallets.index.new-wallet")
       }}</v-btn>
+    </v-col>
+  </v-row>
+  <v-row>
+    <v-col v-for="wallet of wallets" cols="12" sm="6" md="4">
+      <wallet-card :title="wallet.name" :reserved="0" :goal="wallet.goal" />
     </v-col>
   </v-row>
 </template>

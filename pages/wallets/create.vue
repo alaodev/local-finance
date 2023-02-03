@@ -3,7 +3,6 @@ import WalletForm from "~~/pages/wallets/form.vue";
 
 const walletsStore = useWallets();
 
-const { wallets } = storeToRefs(walletsStore);
 const { createWallet } = walletsStore;
 
 const form = ref();
@@ -11,7 +10,10 @@ const form = ref();
 function handleCreateWallet() {
   const validData = form.value.validate();
 
-  if (validData) createWallet(validData);
+  if (validData) {
+    createWallet(validData);
+    navigateTo("/wallets/");
+  }
 }
 </script>
 
