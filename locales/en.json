@@ -1,0 +1,26 @@
+{
+    "drawer": {
+        "dashboard": {
+            "title": "Dashboard"
+        },
+        "wallets": {
+            "title": "Wallets"
+        }
+    },
+    "pages": {
+        "dashboard": {},
+        "wallets": {
+            "index": {
+                "new-wallet": "New wallet"
+            },
+            "create": {
+                "card-title": "Create yout wallet",
+                "form": {
+                    "wallet-name": "Wallet name",
+                    "set-goal": "Set a goal"
+                },
+                "create-btn": "Create"
+            }
+        }
+    }
+}

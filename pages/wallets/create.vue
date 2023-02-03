@@ -24,13 +24,17 @@ function handleCreateWallet() {
   <v-row>
     <v-col>
       <v-card class="mx-auto pa-6" max-width="700">
-        <v-card-title class="mb-5"> Create your wallet </v-card-title>
+        <v-card-title class="mb-5">
+          {{ $t("pages.wallets.create.card-title") }}
+        </v-card-title>
         <v-card-text>
           <wallet-form ref="form" />
         </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-btn @click="handleCreateWallet">CREATE</v-btn>
+          <v-btn @click="handleCreateWallet">{{
+            $t("pages.wallets.create.create-btn")
+          }}</v-btn>
         </v-card-actions>
       </v-card>
     </v-col>

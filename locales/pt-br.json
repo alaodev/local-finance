@@ -1,0 +1,26 @@
+{
+    "drawer": {
+        "dashboard": {
+            "title": "Visão Geral"
+        },
+        "wallets": {
+            "title": "Carteiras"
+        }
+    },
+    "pages": {
+        "dashboard": {},
+        "wallets": {
+            "index": {
+                "new-wallet": "Nova carteira"
+            },
+            "create": {
+                "card-title": "Crie sua carteira",
+                "form": {
+                    "wallet-name": "Nome da carteira",
+                    "set-goal": "Coloque uma meta"
+                },
+                "create-btn": "Criar"
+            }
+        }
+    }
+}

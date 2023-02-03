@@ -32,5 +32,6 @@ console.log(breadcrumbItems);
     <v-breadcrumbs :items="breadcrumbItems"> </v-breadcrumbs>
     <v-spacer />
     <theme-switcher />
+    <lang-switcher />
   </v-app-bar>
 </template>

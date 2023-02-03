@@ -36,12 +36,19 @@ function validate(): WalletType | Boolean {
   <v-form>
     <v-row>
       <v-col cols="12">
-        <text-input v-model="name" :error="nameError" :label="'Wallet name'" />
+        <text-input
+          v-model="name"
+          :error="nameError"
+          :label="$t('pages.wallets.create.form.wallet-name')"
+        />
       </v-col>
     </v-row>
     <v-row>
       <v-col cols="12">
-        <currency-input v-model="goal" :label="'Set a goal'" />
+        <currency-input
+          v-model="goal"
+          :label="$t('pages.wallets.create.form.set-goal')"
+        />
       </v-col>
     </v-row>
   </v-form>

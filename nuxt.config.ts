@@ -9,6 +9,18 @@ export default defineNuxtConfig({
   ],
   modules: [
     "@vueuse/nuxt",
+    [
+      "@nuxtjs/i18n",
+      {
+        defaultLocale: "en",
+        langDir: "./locales/",
+        locales: [
+          { code: "en", iso: "en-US", file: "en.json", dir: "ltr" },
+          { code: "pt-br", iso: "pt-BR", file: "pt-br.json", dir: "ltr" },
+        ],
+        strategy: "no_prefix",
+      },
+    ],
     ["@pinia/nuxt", { autoImports: ["defineStore", "storeToRefs"] }],
   ],
   ssr: false,
