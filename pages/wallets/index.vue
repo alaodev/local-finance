@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import WalletCard from "~~/pages/wallets/wallet-card.vue";
+import WalletCard from "~~/pages/wallets/components/wallet-card.vue";
 
 const walletsStore = useWallets();
 
