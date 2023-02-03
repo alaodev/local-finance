@@ -17,8 +17,14 @@
                     "goal-text": "Goal to achieve: ",
                     "goal-not-defined": "Not defined",
                     "btn-group": {
-                        "reserve": "Reserve",
-                        "withdraw": "Withdraw"
+                        "reserve": {
+                            "title": "Reserve",
+                            "dialog": "How much to book?"
+                        },
+                        "withdraw": {
+                            "title": "Withdraw",
+                            "dialog": "How much withdraw?"
+                        }
                     }
                 }
             },

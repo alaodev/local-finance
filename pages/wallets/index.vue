@@ -17,7 +17,7 @@ const { wallets } = storeToRefs(walletsStore);
   </v-row>
   <v-row>
     <v-col v-for="wallet of wallets" cols="12" sm="6" md="4">
-      <wallet-card :title="wallet.name" :reserved="0" :goal="wallet.goal" />
+      <wallet-card :wallet="wallet" />
     </v-col>
   </v-row>
 </template>

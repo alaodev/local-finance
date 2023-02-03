@@ -17,6 +17,7 @@ function getData(): WalletType {
   return {
     name: name.value,
     goal: goal.value,
+    reserved: 0,
   };
 }
 
