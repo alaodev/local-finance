@@ -30,8 +30,9 @@ console.log(breadcrumbItems);
 <template>
   <v-app-bar>
     <v-breadcrumbs :items="breadcrumbItems"> </v-breadcrumbs>
-    <v-spacer />
-    <theme-switcher />
-    <lang-switcher />
+    <template v-slot:append>
+      <theme-switcher />
+      <lang-switcher />
+    </template>
   </v-app-bar>
 </template>
