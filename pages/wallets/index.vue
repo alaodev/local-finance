@@ -10,7 +10,7 @@ const { wallets } = storeToRefs(walletsStore);
   <v-row>
     <v-col class="d-flex" cols="12">
       <v-spacer />
-      <v-btn to="/wallets/create">{{
+      <v-btn color="primary" to="/wallets/create" variant="flat">{{
         $t("pages.wallets.index.new-wallet")
       }}</v-btn>
     </v-col>

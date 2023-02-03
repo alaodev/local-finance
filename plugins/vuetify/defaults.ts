@@ -4,7 +4,7 @@ export default {
     flat: true,
   },
   VBtn: {
-    variant: "tonal",
+    variant: "flat",
   },
   VCard: {
     variant: "flat",

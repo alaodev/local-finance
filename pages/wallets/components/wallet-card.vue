@@ -71,12 +71,12 @@ const goalPercentage = computed(() => {
     </v-row>
     <v-row>
       <v-col cols="6">
-        <v-btn size="x-small" block>{{
+        <v-btn color="primary" size="small" block>{{
           $t("pages.wallets.index.wallet-card.btn-group.reserve")
         }}</v-btn>
       </v-col>
       <v-col cols="6">
-        <v-btn size="x-small" block>{{
+        <v-btn color="primary" size="small" variant="tonal" block>{{
           $t("pages.wallets.index.wallet-card.btn-group.withdraw")
         }}</v-btn>
       </v-col>
