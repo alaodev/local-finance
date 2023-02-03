@@ -11,7 +11,7 @@ export const useDrawer = defineStore("drawer", () => {
     {
       props: {
         prependIcon: "mdi-view-dashboard",
-        to: "/dashboard",
+        to: "/dashboard/",
       },
       title: dashboardTitle,
       value: "dashboard",
@@ -19,11 +19,10 @@ export const useDrawer = defineStore("drawer", () => {
     {
       props: {
         prependIcon: "mdi-wallet ",
-        to: "/wallets",
+        to: "/wallets/",
       },
       title: walletsTitle,
-      value: "walltes",
-      to: "/walltes",
+      value: "wallets",
     },
   ]);
 
