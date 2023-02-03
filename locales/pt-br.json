@@ -11,8 +11,17 @@
         "dashboard": {},
         "wallets": {
             "index": {
-                "new-wallet": "Nova carteira"
+                "new-wallet": "Nova carteira",
+                "wallet-card": {
+                    "money-header": "Dinheiro reservado",
+                    "goal-text": "Meta a alcançar: ",
+                    "btn-group": {
+                        "reserve": "Reservar",
+                        "withdraw": "Retirar"
+                    }
+                }
             },
+            
             "create": {
                 "card-title": "Crie sua carteira",
                 "form": {

@@ -11,7 +11,15 @@
         "dashboard": {},
         "wallets": {
             "index": {
-                "new-wallet": "New wallet"
+                "new-wallet": "New wallet",
+                "wallet-card": {
+                    "money-header": "Reserved money",
+                    "goal-text": "Goal to achieve: ",
+                    "btn-group": {
+                        "reserve": "Reserve",
+                        "withdraw": "Withdraw"
+                    }
+                }
             },
             "create": {
                 "card-title": "Create yout wallet",

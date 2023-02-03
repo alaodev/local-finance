@@ -38,7 +38,9 @@ const goalPercentage = computed(() => {
         <v-sheet class="pa-6" color="pink">
           <v-row>
             <v-col cols="8" class="justify-center d-flex flex-column">
-              <span>Dinheiro reservado</span>
+              <span>{{
+                $t("pages.wallets.index.wallet-card.money-header")
+              }}</span>
               <span class="text-h5">{{
                 currency(props.reserved, locale)
               }}</span>
@@ -59,16 +61,20 @@ const goalPercentage = computed(() => {
     </v-row>
     <v-row>
       <v-col v-if="props.goal">
-        <span>Meta a alcançar: </span>
+        <span>{{ $t("pages.wallets.index.wallet-card.goal-text") }}</span>
         <strong>{{ currency(props.goal, locale) }}</strong>
       </v-col>
     </v-row>
     <v-row>
       <v-col cols="6">
-        <v-btn size="x-small" block>Reservar dinheiro</v-btn>
+        <v-btn size="x-small" block>{{
+          $t("pages.wallets.index.wallet-card.btn-group.reserve")
+        }}</v-btn>
       </v-col>
       <v-col cols="6">
-        <v-btn size="x-small" block>Retirar dinheiro</v-btn>
+        <v-btn size="x-small" block>{{
+          $t("pages.wallets.index.wallet-card.btn-group.withdraw")
+        }}</v-btn>
       </v-col>
     </v-row>
   </v-card>
