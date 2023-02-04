@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import ReturnButtonLayout from "~~/layouts/return-button-layout.vue";
 import WalletForm from "~~/pages/wallets/forms/create-form.vue";
+import RemoveWallet from "~~/pages/wallets/components/remove-wallet.vue";
 
 const route = useRoute();
 const walletsStore = useWallets();
@@ -10,13 +11,13 @@ const { loadWallet, editWallet } = walletsStore;
 
 const form = ref();
 
-const walletUuid = computed(() => route.params.uuid);
+const walletUuid = computed(() => route.params.uuid as string);
 
 function handleEditWallet() {
   const validData = form.value.validate();
 
   if (validData) {
-    editWallet(walletUuid.value as string, validData);
+    editWallet(validData);
     navigateTo("/wallets/");
   }
 }
@@ -40,6 +41,7 @@ onMounted(() => {
           </v-card-text>
           <v-card-actions>
             <v-spacer />
+            <remove-wallet :wallet-uuid="walletUuid">Remove</remove-wallet>
             <v-btn @click="handleEditWallet">{{
               $t("pages.wallets.edit.create-btn")
             }}</v-btn>

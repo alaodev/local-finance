@@ -20,14 +20,20 @@ export const useWallets = defineStore("wallets", () => {
     });
   }
 
-  function editWallet(uuid: string, data: WalletType) {
-    wallets.value = wallets.value.map((wallet) => {
-      if (wallet.uuid !== uuid) return wallet;
+  function editWallet(walletData: WalletType) {
+    wallets.value = wallets.value.map((data) => {
+      if (data.uuid !== wallet.value?.uuid) return data;
       return {
         ...wallet,
-        ...data,
+        ...walletData,
       };
     });
+  }
+
+  function removeWallet() {
+    wallets.value = wallets.value.filter(
+      (data) => data.uuid !== wallet.value?.uuid
+    );
   }
 
   function calculateReservedValue(
@@ -50,6 +56,7 @@ export const useWallets = defineStore("wallets", () => {
     loadWallet,
     createWallet,
     editWallet,
+    removeWallet,
     calculateReservedValue,
   };
 });
