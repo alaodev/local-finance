@@ -39,7 +39,7 @@ export const useWallets = defineStore("wallets", () => {
       if (wallet.uuid !== uuid) return wallet;
       return {
         ...wallet,
-        reserved: wallet.reserved + value * operator,
+        reserved: (wallet.reserved || 0) + value * operator,
       };
     });
   }

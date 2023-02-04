@@ -33,7 +33,8 @@
                 "card-title": "Crie sua carteira",
                 "form": {
                     "wallet-name": "Nome da carteira",
-                    "set-goal": "Coloque uma meta"
+                    "set-goal": "Coloque uma meta",
+                    "initial-reserve": "Reserva inicial"
                 },
                 "create-btn": "Criar"
             },
