@@ -18,16 +18,12 @@ export const useWallets = defineStore("wallets", () => {
     value: number,
     operator: number
   ) {
-    alert("Entrou");
     wallets.value = wallets.value.map((wallet) => {
-      if (wallet.uuid !== uuid) {
-        return wallet;
-      } else {
-        return {
-          ...wallet,
-          reserved: wallet.reserved + wallet.reserved + value * operator,
-        };
-      }
+      if (wallet.uuid !== uuid) return wallet;
+      return {
+        ...wallet,
+        reserved: wallet.reserved + value * operator,
+      };
     });
   }
 

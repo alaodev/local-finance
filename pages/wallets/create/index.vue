@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import WalletForm from "~~/pages/wallets/form.vue";
+import WalletForm from "~~/pages/wallets/forms/create-form.vue";
 
 const walletsStore = useWallets();
 

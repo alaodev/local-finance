@@ -17,11 +17,12 @@ const props = defineProps<Props>();
 const { locale } = useI18n();
 
 const goalPercentage = computed(() => {
-  if (props.wallet.goal)
-    return (
+  if (props.wallet.goal) {
+    const percentage =
       (parseFloat(props.wallet.reserved as string) * 100) /
-      parseFloat(props.wallet.goal as string)
-    );
+      parseFloat(props.wallet.goal as string);
+    return `${Math.round(percentage)}%`;
+  }
 
   return 0;
 });
