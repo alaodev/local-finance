@@ -1,20 +1,20 @@
 <script lang="ts" setup>
 import { useCurrencyInput } from "vue-currency-input";
+import { localeToCurreny } from "~~/utils/converters";
 
 type Props = {
-  currency?: string;
   modelValue?: string | number;
 };
 
-const props = withDefaults(defineProps<Props>(), {
-  currency: "USD",
-});
+const props = defineProps<Props>();
 
-const { inputRef, setValue, formattedValue, numberValue } = useCurrencyInput({
-  autoDecimalDigits: true,
-  currency: props.currency,
-  precision: 2,
-});
+const { locale } = useI18n();
+const { inputRef, setOptions, setValue, formattedValue, numberValue } =
+  useCurrencyInput({
+    autoDecimalDigits: true,
+    currency: localeToCurreny(locale.value),
+    precision: 2,
+  });
 
 const value = computed({
   get() {
@@ -31,6 +31,12 @@ watch(
     setValue(value as number);
   }
 );
+
+watch(locale, (locale) => {
+  setOptions({
+    currency: localeToCurreny(locale),
+  });
+});
 </script>
 
 <template>
