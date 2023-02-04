@@ -36,6 +36,14 @@
                     "set-goal": "Coloque uma meta"
                 },
                 "create-btn": "Criar"
+            },
+            "edit": {
+                "card-title": "Edite sua carteira",
+                "form": {
+                    "wallet-name": "Nome da carteira",
+                    "set-goal": "Coloque uma meta"
+                },
+                "create-btn": "Editar"
             }
         }
     }

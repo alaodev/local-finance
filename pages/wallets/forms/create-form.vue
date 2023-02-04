@@ -2,6 +2,7 @@
 import { WalletType } from "~~/types/wallet";
 
 defineExpose({
+  setData,
   validate,
 });
 
@@ -19,6 +20,11 @@ function getData(): WalletType {
     goal: goal.value,
     reserved: 0,
   };
+}
+
+function setData(data: WalletType) {
+  name.value = data.name;
+  goal.value = data.goal;
 }
 
 function validate(): WalletType | Boolean {

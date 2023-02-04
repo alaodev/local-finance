@@ -29,12 +29,20 @@
                 }
             },
             "create": {
-                "card-title": "Create yout wallet",
+                "card-title": "Create your wallet",
                 "form": {
                     "wallet-name": "Wallet name",
                     "set-goal": "Set a goal"
                 },
                 "create-btn": "Create"
+            },
+            "edit": {
+                "card-title": "Edit your wallet",
+                "form": {
+                    "wallet-name": "Wallet name",
+                    "set-goal": "Set a goal"
+                },
+                "create-btn": "Edit"
             }
         }
     }
