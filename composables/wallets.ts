@@ -21,10 +21,11 @@ export const useWallets = defineStore("wallets", () => {
   }
 
   function editWallet(walletData: WalletType) {
+    console.log(walletData);
     wallets.value = wallets.value.map((data) => {
       if (data.uuid !== wallet.value?.uuid) return data;
       return {
-        ...wallet,
+        ...wallet.value,
         ...walletData,
       };
     });

@@ -24,17 +24,18 @@
                         "withdraw": {
                             "title": "Withdraw",
                             "dialog": "How much withdraw?"
-                        }
+                        },
+                        "close": "Close"
                     }
                 }
             },
+            "form": {
+                "wallet-name": "Wallet name",
+                "set-goal": "Set a goal",
+                "initial-reserve": "Initial reserve"
+            },
             "create": {
                 "card-title": "Create your wallet",
-                "form": {
-                    "wallet-name": "Wallet name",
-                    "set-goal": "Set a goal",
-                    "initial-reserve": "Initial reserve"
-                },
                 "create-btn": "Create"
             },
             "edit": {
@@ -43,7 +44,8 @@
                     "wallet-name": "Wallet name",
                     "set-goal": "Set a goal"
                 },
-                "create-btn": "Edit"
+                "remove-btn": "Remove",
+                "edit-btn": "Edit"
             }
         }
     }

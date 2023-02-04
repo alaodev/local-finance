@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import ReturnButtonLayout from "~~/layouts/return-button-layout.vue";
-import WalletForm from "~~/pages/wallets/forms/create-form.vue";
+import WalletForm from "~~/pages/wallets/forms/form.vue";
 import RemoveWallet from "~~/pages/wallets/components/remove-wallet.vue";
 
 const route = useRoute();
@@ -41,9 +41,11 @@ onMounted(() => {
           </v-card-text>
           <v-card-actions>
             <v-spacer />
-            <remove-wallet :wallet-uuid="walletUuid">Remove</remove-wallet>
+            <remove-wallet :wallet-uuid="walletUuid">
+              {{ $t("pages.wallets.edit.remove-btn") }}
+            </remove-wallet>
             <v-btn @click="handleEditWallet">{{
-              $t("pages.wallets.edit.create-btn")
+              $t("pages.wallets.edit.edit-btn")
             }}</v-btn>
           </v-card-actions>
         </v-card>

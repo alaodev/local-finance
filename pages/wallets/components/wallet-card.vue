@@ -7,7 +7,7 @@ type Props = {
   wallet: {
     uuid?: string;
     name: string;
-    reserved: string | number;
+    reserved?: string | number;
     goal?: string | number;
   };
 };

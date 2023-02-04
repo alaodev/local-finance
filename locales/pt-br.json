@@ -24,18 +24,18 @@
                         "withdraw": {
                             "title": "Retirar",
                             "dialog": "Quanto retirar?"
-                        }
+                        },
+                        "close": "Fechar"
                     }
                 }
             },
-            
+            "form": {
+                "wallet-name": "Nome da carteira",
+                "set-goal": "Coloque uma meta",
+                "initial-reserve": "Reserva inicial"
+            },
             "create": {
                 "card-title": "Crie sua carteira",
-                "form": {
-                    "wallet-name": "Nome da carteira",
-                    "set-goal": "Coloque uma meta",
-                    "initial-reserve": "Reserva inicial"
-                },
                 "create-btn": "Criar"
             },
             "edit": {
@@ -44,7 +44,8 @@
                     "wallet-name": "Nome da carteira",
                     "set-goal": "Coloque uma meta"
                 },
-                "create-btn": "Editar"
+                "remove-btn": "Remover",
+                "edit-btn": "Editar"
             }
         }
     }

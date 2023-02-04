@@ -70,7 +70,7 @@ function validate(): WalletType | Boolean {
         <text-input
           v-model="name"
           :error="nameError"
-          :label="$t('pages.wallets.create.form.wallet-name')"
+          :label="$t('pages.wallets.form.wallet-name')"
         />
       </v-col>
     </v-row>
@@ -78,14 +78,14 @@ function validate(): WalletType | Boolean {
       <v-col cols="12" :sm="editMode ? 12 : 6">
         <currency-input
           v-model="goal"
-          :label="$t('pages.wallets.create.form.set-goal')"
+          :label="$t('pages.wallets.form.set-goal')"
         />
       </v-col>
       <v-col v-if="!editMode" cols="12" sm="6">
         <currency-input
           v-model="reserved"
           :error="reservedError"
-          :label="$t('pages.wallets.create.form.initial-reserve')"
+          :label="$t('pages.wallets.form.initial-reserve')"
         />
       </v-col>
     </v-row>

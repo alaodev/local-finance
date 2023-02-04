@@ -38,7 +38,9 @@ function handleCalculateReservedAmount() {
         </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-btn @click="dialog = false">Fechar</v-btn>
+          <v-btn @click="dialog = false">
+            {{ $t("pages.wallets.index.wallet-card.btn-group.close") }}
+          </v-btn>
           <v-btn
             @click="handleCalculateReservedAmount"
             color="primary"

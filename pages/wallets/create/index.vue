@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import ReturnButtonLayout from "~~/layouts/return-button-layout.vue";
-import WalletForm from "~~/pages/wallets/forms/create-form.vue";
+import WalletForm from "~~/pages/wallets/forms/form.vue";
 
 const walletsStore = useWallets();
 
