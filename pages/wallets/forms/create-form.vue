@@ -75,13 +75,13 @@ function validate(): WalletType | Boolean {
       </v-col>
     </v-row>
     <v-row>
-      <v-col :cols="editMode ? 12 : 6">
+      <v-col cols="12" :sm="editMode ? 12 : 6">
         <currency-input
           v-model="goal"
           :label="$t('pages.wallets.create.form.set-goal')"
         />
       </v-col>
-      <v-col v-if="!editMode" cols="6">
+      <v-col v-if="!editMode" cols="12" sm="6">
         <currency-input
           v-model="reserved"
           :error="reservedError"
