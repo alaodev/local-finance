@@ -2,7 +2,7 @@
 import { IconPickerType } from "~~/types/icon-picker";
 
 type Props = {
-  modelValue?: string;
+  modelValue?: IconPickerType;
   items: Array<IconPickerType>;
 };
 
@@ -11,13 +11,14 @@ const props = defineProps<Props>();
 const emits = defineEmits(["update:modelValue"]);
 
 function updateModelValue(value: string) {
-  emits("update:modelValue", value);
+  const item = props.items.find((item) => item.icon === value);
+  emits("update:modelValue", item);
 }
 </script>
 
 <template>
   <v-radio-group
-    :model-value="props.modelValue"
+    :model-value="props.modelValue?.icon"
     @update:model-value="updateModelValue"
     class="icon-picker"
     inline

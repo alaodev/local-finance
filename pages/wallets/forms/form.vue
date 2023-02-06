@@ -31,31 +31,31 @@ watch(icon, function () {
 const icons = [
   {
     icon: "mdi-currency-usd",
-    color: "#00a2e2",
+    color: "primary",
   },
   {
     icon: "mdi-heart-outline",
-    color: "#c8689b",
+    color: "pink",
   },
   {
     icon: "mdi-car-outline",
-    color: "#847cdf",
+    color: "purple",
   },
   {
     icon: "mdi-home-outline",
-    color: "#4BA098",
+    color: "green",
   },
   {
     icon: "mdi-receipt-text-outline",
-    color: "#8846a6",
+    color: "deep-purple",
   },
   {
     icon: "mdi-laptop",
-    color: "#268177",
+    color: "amber",
   },
   {
     icon: "mdi-gift-outline",
-    color: "#20389f",
+    color: "lime",
   },
 ];
 

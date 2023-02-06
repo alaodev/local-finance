@@ -1,7 +1,9 @@
 <script lang="ts" setup>
 import { currency } from "~~/utils/formatters";
+import { WalletType } from "~~/types/wallet";
 
 import WalletDialog from "~~/pages/wallets/components/wallet-dialog.vue";
+import { IconPickerType } from "~~/types/icon-picker";
 
 type Props = {
   wallet: {
@@ -9,6 +11,7 @@ type Props = {
     name: string;
     reserved?: string | number;
     goal?: string | number;
+    icon: IconPickerType;
   };
 };
 
@@ -32,7 +35,13 @@ const goalPercentage = computed(() => {
   <v-card class="pa-6">
     <v-row>
       <v-col class="d-flex">
-        <v-card-title class="ml-n4">
+        <v-card-title class="align-center d-flex ml-n4">
+          <v-icon
+            :color="props.wallet.icon.color"
+            :icon="props.wallet.icon.icon"
+            :size="25"
+            class="mr-2"
+          />
           {{ props.wallet.name }}
         </v-card-title>
         <v-spacer />
@@ -44,7 +53,7 @@ const goalPercentage = computed(() => {
     </v-row>
     <v-row>
       <v-col>
-        <v-sheet class="pa-6" color="pink">
+        <v-sheet class="pa-6" :color="props.wallet.icon.color">
           <v-row>
             <v-col cols="8" class="justify-center d-flex flex-column">
               <span>{{
