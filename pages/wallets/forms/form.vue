@@ -137,9 +137,9 @@ function validate(): WalletType | Boolean {
       <v-col cols="12">
         <icon-picker
           v-model="icon"
-          label="Selecione um ícone:"
           :error="iconError"
           :items="icons"
+          :label="$t('pages.wallets.form.select-icon')"
         />
       </v-col>
     </v-row>

@@ -32,7 +32,8 @@
             "form": {
                 "wallet-name": "Wallet name",
                 "set-goal": "Set a goal",
-                "initial-reserve": "Initial reserve"
+                "initial-reserve": "Initial reserve",
+                "select-icon": "Select an icon: "
             },
             "create": {
                 "card-title": "Create your wallet",
