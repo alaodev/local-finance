@@ -3,4 +3,5 @@ export type WalletType = {
   goal?: number;
   name: string;
   reserved?: number;
+  icon: string;
 };

@@ -22,12 +22,50 @@ watch(reserved, function () {
   reservedError.value = false;
 });
 
+const icon = ref();
+const iconError = ref(false);
+watch(icon, function () {
+  iconError.value = false;
+});
+
+const icons = [
+  {
+    icon: "mdi-currency-usd",
+    color: "#00a2e2",
+  },
+  {
+    icon: "mdi-heart-outline",
+    color: "#c8689b",
+  },
+  {
+    icon: "mdi-car-outline",
+    color: "#847cdf",
+  },
+  {
+    icon: "mdi-home-outline",
+    color: "#4BA098",
+  },
+  {
+    icon: "mdi-receipt-text-outline",
+    color: "#8846a6",
+  },
+  {
+    icon: "mdi-laptop",
+    color: "#268177",
+  },
+  {
+    icon: "mdi-gift-outline",
+    color: "#20389f",
+  },
+];
+
 const editMode = computed(() => (route.params.uuid ? true : false));
 
 function getData(): WalletType {
   let data: WalletType = {
     name: name.value,
     goal: goal.value,
+    icon: icon.value,
   };
 
   if (!editMode.value) data.reserved = reserved.value;
@@ -39,6 +77,7 @@ function setData(data: WalletType) {
   name.value = data.name;
   goal.value = data.goal;
   if (editMode.value) reserved.value = data.reserved as number;
+  icon.value = data.icon;
 }
 
 function validate(): WalletType | Boolean {
@@ -55,6 +94,11 @@ function validate(): WalletType | Boolean {
       reservedError.value = true;
       hasError = true;
     }
+  }
+
+  if (!data.icon) {
+    iconError.value = true;
+    hasError = true;
   }
 
   if (hasError) return false;
@@ -86,6 +130,16 @@ function validate(): WalletType | Boolean {
           v-model="reserved"
           :error="reservedError"
           :label="$t('pages.wallets.form.initial-reserve')"
+        />
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="12">
+        <icon-picker
+          v-model="icon"
+          label="Selecione um ícone:"
+          :error="iconError"
+          :items="icons"
         />
       </v-col>
     </v-row>
