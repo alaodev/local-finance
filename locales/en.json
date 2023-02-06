@@ -47,6 +47,12 @@
                 },
                 "remove-btn": "Remove",
                 "edit-btn": "Edit"
+            },
+            "remove": {
+                "card-title": "Remove wallet",
+                "card-text": "Do you really want to remove this wallet?",
+                "remove-btn": "Remove",
+                "close": "Close"
             }
         }
     }

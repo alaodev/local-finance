@@ -16,11 +16,15 @@ function handleRemoveWallet() {
     <slot />
     <v-dialog v-model="dialog" activator="parent" max-width="500">
       <v-card class="pa-6">
-        <v-card-title> Remover carteira </v-card-title>
-        <v-card-text> Deseja realmente remover essa carteira? </v-card-text>
+        <v-card-title>
+          {{ $t("pages.wallets.remove.card-title") }}
+        </v-card-title>
+        <v-card-text> {{ $t("pages.wallets.remove.card-text") }} </v-card-text>
         <v-card-actions>
           <v-spacer />
-          <v-btn @click="dialog = false">Fechar</v-btn>
+          <v-btn @click="dialog = false">
+            {{ $t("pages.wallets.remove.close") }}
+          </v-btn>
           <v-btn @click="handleRemoveWallet" color="primary" variant="flat">
             <slot />
           </v-btn>

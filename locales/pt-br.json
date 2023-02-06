@@ -47,6 +47,12 @@
                 },
                 "remove-btn": "Remover",
                 "edit-btn": "Editar"
+            },
+            "remove": {
+                "card-title": "Remover carteira",
+                "card-text": "Deseja realmente remover essa carteira?",
+                "remove-btn": "Remover",
+                "close": "Close"
             }
         }
     }
