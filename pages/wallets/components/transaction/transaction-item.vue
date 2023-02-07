@@ -26,7 +26,7 @@ const localeDate = computed(() =>
 
 const transactionTypes: any = ref({
   "-1": {
-    color: "red",
+    color: "black",
     icon: "mdi-cash-minus",
     label: withdrawValueTitle,
     symbol: "-",
