@@ -3,16 +3,9 @@ import { currency } from "~~/utils/formatters";
 import { WalletType } from "~~/types/wallet";
 
 import WalletDialog from "~~/pages/wallets/components/wallet-dialog.vue";
-import { IconPickerType } from "~~/types/icon-picker";
 
 type Props = {
-  wallet: {
-    uuid?: string;
-    name: string;
-    reserved?: string | number;
-    goal?: string | number;
-    icon: IconPickerType;
-  };
+  wallet: WalletType;
 };
 
 const props = defineProps<Props>();
@@ -22,8 +15,7 @@ const { locale } = useI18n();
 const goalPercentage = computed(() => {
   if (props.wallet.goal) {
     const percentage =
-      (parseFloat(props.wallet.reserved as string) * 100) /
-      parseFloat(props.wallet.goal as string);
+      ((props.wallet.reserved as number) * 100) / props.wallet.goal;
     return `${Math.round(percentage)}%`;
   }
 
