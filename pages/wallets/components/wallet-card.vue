@@ -46,6 +46,10 @@ const goalPercentage = computed(() => {
         </v-card-title>
         <v-spacer />
         <v-btn
+          icon="mdi-list-box-outline"
+          :to="`/wallets/transactions/${props.wallet.uuid}`"
+        />
+        <v-btn
           icon="mdi-cog-outline"
           :to="`/wallets/edit/${props.wallet.uuid}`"
         />

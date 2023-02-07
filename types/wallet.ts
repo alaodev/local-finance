@@ -1,4 +1,5 @@
-import { IconPickerType } from "./icon-picker";
+import { IconPickerType } from "~~/types/icon-picker";
+import { TransactionType } from "~~/types/transaction";
 
 export type WalletType = {
   uuid?: string;
@@ -6,4 +7,5 @@ export type WalletType = {
   name: string;
   reserved?: number;
   icon: IconPickerType;
+  transactions: Array<TransactionType>;
 };
