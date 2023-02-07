@@ -1,10 +1,10 @@
 import { useStorage } from "@vueuse/core";
 
-export const useDrawer = defineStore("drawer", () => {
+export const useNavigation = defineStore("navigation", () => {
   const { t } = useI18n();
 
-  const dashboardTitle = computed(() => t("drawer.dashboard.title"));
-  const walletsTitle = computed(() => t("drawer.wallets.title"));
+  const dashboardTitle = computed(() => t("navigation.dashboard.title"));
+  const walletsTitle = computed(() => t("navigation.wallets.title"));
 
   const drawer = useStorage("vue-storage-drawer", false);
   const items = ref([

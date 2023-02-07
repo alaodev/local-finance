@@ -13,5 +13,6 @@ const { theme } = storeToRefs(themeStore);
         <slot />
       </v-container>
     </v-main>
+    <bottom-navigation class="d-lg-none d-md-flex" />
   </v-app>
 </template>

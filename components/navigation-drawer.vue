@@ -1,7 +1,7 @@
 <script lang="ts" setup>
-const drawerStore = useDrawer();
+const navigationStore = useNavigation();
 
-const { drawer, items } = storeToRefs(drawerStore);
+const { drawer, items } = storeToRefs(navigationStore);
 
 const drawerStateIcon = computed(() =>
   drawer.value ? "mdi-circle-outline" : "mdi-record-circle-outline"
