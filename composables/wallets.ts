@@ -50,7 +50,10 @@ export const useWallets = defineStore("wallets", () => {
       return {
         ...wallet,
         reserved: (wallet.reserved || 0) + value * operator,
-        transactions: [...wallet.transactions, transaction],
+        transactions: [
+          ...(wallet.transactions as Array<TransactionType>),
+          transaction,
+        ],
       };
     });
   }

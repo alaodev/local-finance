@@ -4,6 +4,7 @@ import TransactionItem from "~~/pages/wallets/components/transaction/transaction
 import { TransactionType } from "~~/types/transaction";
 
 type Props = {
+  title: string;
   items: Array<TransactionType>;
 };
 
@@ -11,8 +12,8 @@ const props = defineProps<Props>();
 </script>
 
 <template>
-  <v-list lines="two" rounded>
-    <v-list-subheader>Transações</v-list-subheader>
+  <v-list class="mx-auto pa-6" lines="two" max-width="700" rounded>
+    <v-list-subheader>{{ props.title }}</v-list-subheader>
     <transaction-item v-for="item in props.items" :item="item" />
   </v-list>
 </template>

@@ -53,6 +53,14 @@
                 "card-text": "Do you really want to remove this wallet?",
                 "remove-btn": "Remove",
                 "close": "Close"
+            },
+            "transactions": {
+                "title": "Transactions",
+                "transaction-item": {
+                    "initial-title": "Initial value",
+                    "reserved-title": "Reserved value",
+                    "withdraw-title": "Withdraw value"
+                }
             }
         }
     }

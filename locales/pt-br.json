@@ -53,6 +53,14 @@
                 "card-text": "Deseja realmente remover essa carteira?",
                 "remove-btn": "Remover",
                 "close": "Close"
+            },
+            "transactions": {
+                "title": "Transações",
+                "transaction-item": {
+                    "initial-title": "Valor inicial",
+                    "reserved-title": "Valor reservado",
+                    "withdraw-title": "Valor removido"
+                }
             }
         }
     }

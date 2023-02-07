@@ -20,6 +20,7 @@ onMounted(() => {
   <return-button-layout return-to="/wallets/">
     <transaction-list
       :items="(wallet?.transactions as Array<TransactionType>)"
+      :title="$t('pages.wallets.transactions.title')"
     />
   </return-button-layout>
 </template>

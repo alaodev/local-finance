@@ -6,3 +6,7 @@ export function localeToCurreny(localeCode: string) {
 
   return currencies[localeCode];
 }
+
+export function timestampToLocaleDateString(time: number, localeCode: string) {
+  return new Date(time).toLocaleDateString(localeCode);
+}

@@ -1,5 +1,5 @@
 export type TransactionType = {
-  uuid?: string;
+  uuid: string;
   createdAt: number;
   type: number;
   value: number;

@@ -1,4 +1,6 @@
 <script lang="ts" setup>
+import { currency } from "~~/utils/formatters";
+import { timestampToLocaleDateString } from "~~/utils/converters";
 import { TransactionType } from "~~/types/transaction";
 
 type Props = {
@@ -6,22 +8,63 @@ type Props = {
 };
 
 const props = defineProps<Props>();
+
+const { locale, t } = useI18n();
+
+const initialValueTitle = computed(() =>
+  t("pages.wallets.transactions.transaction-item.initial-title")
+);
+const withdrawValueTitle = computed(() =>
+  t("pages.wallets.transactions.transaction-item.withdraw-title")
+);
+const reservedValueTitle = computed(() =>
+  t("pages.wallets.transactions.transaction-item.reserved-title")
+);
+const localeDate = computed(() =>
+  timestampToLocaleDateString(props.item.createdAt, locale.value)
+);
+
+const transactionTypes: any = ref({
+  "-1": {
+    color: "red",
+    icon: "mdi-cash-minus",
+    label: withdrawValueTitle,
+    symbol: "-",
+  },
+  "0": {
+    color: "grey",
+    icon: "mdi-cash-fast",
+    label: initialValueTitle,
+    symbol: "",
+  },
+  "1": {
+    color: "green",
+    icon: "mdi-cash-plus",
+    label: reservedValueTitle,
+    symbol: "+",
+  },
+});
 </script>
 
 <template>
   <v-list-item
     :key="props.item.uuid"
-    :title="props.item.type"
-    :subtitle="props.item.createdAt"
+    :subtitle="localeDate"
+    :title="transactionTypes[props.item.type].label"
   >
     <template v-slot:prepend>
-      <v-avatar color="grey-lighten-1">
-        <v-icon color="white">mdi-folder</v-icon>
+      <v-avatar>
+        <v-icon :icon="transactionTypes[props.item.type].icon" />
       </v-avatar>
     </template>
 
     <template v-slot:append>
-      <strong>{{ props.item.value }}</strong>
+      <strong :class="`text-${transactionTypes[props.item.type].color}`">{{
+        `${transactionTypes[props.item.type].symbol} ${currency(
+          props.item.value,
+          locale
+        )}`
+      }}</strong>
     </template>
   </v-list-item>
 </template>

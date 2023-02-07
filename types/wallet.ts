@@ -7,5 +7,5 @@ export type WalletType = {
   name: string;
   reserved?: number;
   icon: IconPickerType;
-  transactions: Array<TransactionType>;
+  transactions?: Array<TransactionType>;
 };
