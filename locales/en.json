@@ -5,13 +5,15 @@
         },
         "wallets": {
             "title": "Wallets"
+        },
+        "cryptos": {
+            "title": "Cryptos"
         }
     },
     "pages": {
         "dashboard": {},
         "wallets": {
             "index": {
-                "new-wallet": "New wallet",
                 "wallet-card": {
                     "money-header": "Reserved money",
                     "goal-text": "Goal to achieve: ",
@@ -60,6 +62,18 @@
                     "initial-title": "Initial value",
                     "reserved-title": "Reserved value",
                     "withdraw-title": "Withdraw value"
+                }
+            }
+        },
+        "cryptos": {
+            "list": {
+                "crypto-list-card": {
+                    "title": "Crypto list",
+                    "filter": "Search by name",
+                    "list": {
+                        "name": "Name",
+                        "value": "Price"
+                    }
                 }
             }
         }

@@ -9,8 +9,17 @@ export default {
   VCard: {
     variant: "flat",
   },
+  VSelect: {
+    clearable: true,
+    hideDetails: true,
+    variant: "outlined",
+  },
   VSheet: {
     rounded: true,
+  },
+  VTable: {
+    fixedHeader: true,
+    hover: true,
   },
   VTextField: {
     clearable: true,
