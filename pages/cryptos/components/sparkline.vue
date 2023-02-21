@@ -19,12 +19,22 @@ type Props = {
 
 const props = defineProps<Props>();
 
+const data = computed(() => props.data);
+const borderColor = computed(() => {
+  if (!props.data) return "#c4c4c4";
+  const first = props.data[0];
+  const last = props.data[props.data.length - 1];
+  if (first < last) return "#43a047";
+  if (first > last) return "#e53935";
+  return "#c4c4c4";
+});
+
 const chartData: Ref<ChartData> = ref({
   labels: props.data,
   datasets: [
     {
-      data: props.data,
-      borderColor: "#c62828",
+      data,
+      borderColor,
       borderWidth: 1,
       tension: 0.5,
     },

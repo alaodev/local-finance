@@ -55,27 +55,49 @@
                 "card-text": "Deseja realmente remover essa carteira?",
                 "remove-btn": "Remover",
                 "close": "Close"
-            },
-            "transactions": {
-                "title": "Transações",
-                "transaction-item": {
-                    "initial-title": "Valor inicial",
-                    "reserved-title": "Valor reservado",
-                    "withdraw-title": "Valor removido"
-                }
             }
         },
         "cryptos": {
+            "index": {
+                "crypto-card": {
+                    "menu": {
+                        "remove": "Remover"
+                    },
+                    "btn-group": {
+                        "deposit": {
+                            "title": "Depositar",
+                            "dialog": "Quanto depositar?"
+                        },
+                        "withdraw": {
+                            "title": "Retirar",
+                            "dialog": "Quanto retirar?"
+                        },
+                        "close": "Fechar"
+                    }
+                }
+            },
             "list": {
                 "crypto-list-card": {
                     "title": "Lista de criptomoedas",
                     "filter": "Procurar por nome",
                     "list": {
                         "name": "Nome",
-                        "value": "Preço"
+                        "price": "Preço",
+                        "last-7d": "Últimos 7 dias",
+                        "menu": {
+                            "add-crypto": "Adicionar cripto"
+                        }
                     }
                 }
             }
+        }
+    },
+    "transactions": {
+        "title": "Transações",
+        "transaction-item": {
+            "initial-title": "Valor inicial",
+            "reserved-title": "Valor reservado",
+            "withdraw-title": "Valor removido"
         }
     }
 }

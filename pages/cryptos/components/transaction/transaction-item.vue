@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { currency } from "~~/utils/formatters";
+import { localeNumber } from "~~/utils/formatters";
 import { timestampToLocaleDateString } from "~~/utils/converters";
 import { TransactionType } from "~~/types/transaction";
 
@@ -60,10 +60,7 @@ const transactionTypes: any = ref({
 
     <template v-slot:append>
       <strong :class="`text-${transactionTypes[props.item.type].color}`">{{
-        `${transactionTypes[props.item.type].symbol} ${currency(
-          props.item.value,
-          locale
-        )}`
+        `${localeNumber(props.item.value, locale)}`
       }}</strong>
     </template>
   </v-list-item>

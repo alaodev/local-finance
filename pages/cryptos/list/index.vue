@@ -5,24 +5,24 @@ import CryptoList from "~~/pages/cryptos/components/crypto-list.vue";
 const cryptosStore = useCryptos();
 
 const {
-  tableLimit,
-  tablePage,
-  tableNameFilter,
-  loadingCryptoList,
-  tableSize,
-  pagedCryptos,
+  cryptoTableLimit,
+  cryptoTablePage,
+  cryptoTableNameFilter,
+  loadingCryptoTable,
+  cryptoTableSize,
+  pagedCryptoTable,
 } = storeToRefs(cryptosStore);
-const { loadCryptoList } = cryptosStore;
+const { loadCryptoTable } = cryptosStore;
 
 const limitItems = [5, 10, 25, 50, 100];
 
 const paginationLength = computed(
   () =>
-    tableSize.value / tableLimit.value +
-    (tableSize.value % tableLimit.value ? 1 : 0)
+    cryptoTableSize.value / cryptoTableLimit.value +
+    (cryptoTableSize.value % cryptoTableLimit.value ? 1 : 0)
 );
 
-onMounted(() => loadCryptoList());
+onMounted(() => loadCryptoTable());
 </script>
 
 <template>
@@ -30,8 +30,8 @@ onMounted(() => loadCryptoList());
     <v-row>
       <v-col>
         <v-card
-          :disabled="loadingCryptoList"
-          :loading="loadingCryptoList"
+          :disabled="loadingCryptoTable"
+          :loading="loadingCryptoTable"
           class="mx-auto pa-6"
           max-width="900"
         >
@@ -43,7 +43,7 @@ onMounted(() => loadCryptoList());
             <v-row>
               <v-col cols="8" sm="10">
                 <text-input
-                  v-model="tableNameFilter"
+                  v-model="cryptoTableNameFilter"
                   prepend-inner-icon="mdi-magnify"
                   density="compact"
                   :label="$t('pages.cryptos.list.crypto-list-card.filter')"
@@ -51,7 +51,7 @@ onMounted(() => loadCryptoList());
               </v-col>
               <v-col cols="4" sm="2"
                 ><select-input
-                  v-model="tableLimit"
+                  v-model="cryptoTableLimit"
                   :clearable="false"
                   :items="limitItems"
                   density="compact"
@@ -60,17 +60,15 @@ onMounted(() => loadCryptoList());
             </v-row>
             <v-row>
               <v-col cols="12">
-                <crypto-list :cryptos="pagedCryptos" />
+                <crypto-list :cryptos="pagedCryptoTable" />
               </v-col>
             </v-row>
           </v-card-text>
           <v-card-actions>
             <v-pagination
-              v-model="tablePage"
+              v-model="cryptoTablePage"
               :length="paginationLength"
-              :total-visible="5"
               class="mx-auto"
-              ellipsis="..."
             ></v-pagination>
           </v-card-actions>
         </v-card>

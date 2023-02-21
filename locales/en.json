@@ -55,27 +55,49 @@
                 "card-text": "Do you really want to remove this wallet?",
                 "remove-btn": "Remove",
                 "close": "Close"
-            },
-            "transactions": {
-                "title": "Transactions",
-                "transaction-item": {
-                    "initial-title": "Initial value",
-                    "reserved-title": "Reserved value",
-                    "withdraw-title": "Withdraw value"
-                }
             }
         },
         "cryptos": {
+            "index": {
+                "crypto-card": {
+                    "menu": {
+                        "remove": "Remove"
+                    },
+                    "btn-group": {
+                        "deposit": {
+                            "title": "Deposit",
+                            "dialog": "How much to deposit?"
+                        },
+                        "withdraw": {
+                            "title": "Withdraw",
+                            "dialog": "How much withdraw?"
+                        },
+                        "close": "Close"
+                    }
+                }
+            },
             "list": {
                 "crypto-list-card": {
                     "title": "Crypto list",
                     "filter": "Search by name",
                     "list": {
                         "name": "Name",
-                        "value": "Price"
+                        "price": "Price",
+                        "last-7d": "Last 7 days",
+                        "menu": {
+                            "add-crypto": "Add crypto"
+                        }
                     }
                 }
             }
+        }
+    },
+    "transactions": {
+        "title": "Transactions",
+        "transaction-item": {
+            "initial-title": "Initial value",
+            "reserved-title": "Reserved value",
+            "withdraw-title": "Withdraw value"
         }
     }
 }

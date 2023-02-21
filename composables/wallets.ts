@@ -1,5 +1,5 @@
-import { useStorage } from "@vueuse/core";
 import { Ref } from "vue";
+import { useStorage } from "@vueuse/core";
 import { v4 as uuidv4 } from "uuid";
 import { WalletType } from "~~/types/wallet";
 import { TransactionType } from "~~/types/transaction";

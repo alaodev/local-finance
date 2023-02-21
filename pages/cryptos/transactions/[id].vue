@@ -4,22 +4,18 @@ import { TransactionType } from "~~/types/transaction";
 import TransactionList from "../components/transaction/transaction-list.vue";
 
 const route = useRoute();
-const walletsStore = useWallets();
+const cryptosStore = useCryptos();
 
-const { wallet } = storeToRefs(walletsStore);
-const { loadWallet } = walletsStore;
+const { findCryptoById } = cryptosStore;
 
-const walletUuid = computed(() => route.params.uuid as string);
-
-onMounted(() => {
-  loadWallet(walletUuid.value as string);
-});
+const cryptoId = computed(() => route.params.id as string);
+const crypto = computed(() => findCryptoById(cryptoId.value));
 </script>
 
 <template>
-  <return-button-layout return-to="/wallets/">
+  <return-button-layout return-to="/cryptos/">
     <transaction-list
-      :items="(wallet?.transactions as Array<TransactionType>)"
+      :items="(crypto?.transactions as Array<TransactionType>)"
       :title="$t('transactions.title')"
     />
   </return-button-layout>

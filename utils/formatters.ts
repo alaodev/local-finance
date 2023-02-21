@@ -18,3 +18,7 @@ export function currency(value: string | number = 0, localeCode: string) {
     currency: locale[localeCode].currency,
   });
 }
+
+export function localeNumber(value: string | number = 0, localeCode: string) {
+  return Number(value).toLocaleString(localeCode);
+}

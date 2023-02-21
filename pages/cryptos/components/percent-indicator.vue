@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 type Props = {
   value: number;
+  tooltip?: string;
 };
 
 const props = defineProps<Props>();
@@ -24,5 +25,8 @@ const indicator = computed(() => {
   <div :class="`${indicator.color} d-flex`">
     <v-icon :icon="indicator.icon" />
     <strong> {{ Math.abs(props.value) }}% </strong>
+    <v-tooltip v-if="props.tooltip" activator="parent" location="top">
+      {{ props.tooltip }}
+    </v-tooltip>
   </div>
 </template>

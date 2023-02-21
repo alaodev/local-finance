@@ -9,6 +9,10 @@ export default {
   VCard: {
     variant: "flat",
   },
+  VPagination: {
+    ellipsis: "...",
+    totalVisible: 5,
+  },
   VSelect: {
     clearable: true,
     hideDetails: true,

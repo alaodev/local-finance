@@ -1,35 +1,55 @@
 import { Ref } from "vue";
-import { CryptoItem } from "~~/types/cryptos";
+import { useStorage } from "@vueuse/core";
+import { v4 as uuidv4 } from "uuid";
+import { CryptoTableItemType, CryptoType } from "~~/types/cryptos";
+import { TransactionType } from "~~/types/transaction";
 
 export const useCryptos = defineStore("cryptos", () => {
-  const cryptoList: Ref<Array<CryptoItem>> = ref([]);
-  const tableLimit = ref(10);
-  const tablePage = ref(1);
-  const tableNameFilter = ref("");
-  const loadingCryptoList = ref(false);
+  const cryptos: Ref<Array<CryptoType>> = useStorage("vue-storage-cryptos", []);
+  const cryptoListLimit = ref(6);
+  const cryptoListPage = ref(1);
+  const cryptoListNameFilter = ref("");
 
-  const filteredCryptos = computed(() => {
-    return cryptoList.value.filter((item) =>
-      sanitize(item.name).includes(sanitize(tableNameFilter.value))
+  const cryptoTable: Ref<Array<CryptoTableItemType>> = ref([]);
+  const cryptoTableLimit = ref(10);
+  const cryptoTablePage = ref(1);
+  const cryptoTableNameFilter = ref("");
+  const loadingCryptoTable = ref(false);
+
+  const filteredCryptoList = computed(() => {
+    return cryptos.value.filter((item) =>
+      sanitize(item.name).includes(sanitize(cryptoListNameFilter.value))
+    );
+  });
+  const cryptoListSize = computed(() => filteredCryptoList.value.length);
+  const pagedCryptoList = computed(() => {
+    return filteredCryptoList.value.slice(
+      (cryptoListPage.value - 1) * cryptoListLimit.value,
+      cryptoListLimit.value * cryptoListPage.value
     );
   });
 
-  const tableSize = computed(() => filteredCryptos.value.length);
-
-  const pagedCryptos = computed(() => {
-    return filteredCryptos.value.slice(
-      (tablePage.value - 1) * tableLimit.value,
-      tableLimit.value * tablePage.value
+  const filteredCryptoTable = computed(() => {
+    return cryptoTable.value.filter((item) =>
+      sanitize(item.name).includes(sanitize(cryptoTableNameFilter.value))
+    );
+  });
+  const cryptoTableSize = computed(() => filteredCryptoTable.value.length);
+  const pagedCryptoTable = computed(() => {
+    return filteredCryptoTable.value.slice(
+      (cryptoTablePage.value - 1) * cryptoTableLimit.value,
+      cryptoTableLimit.value * cryptoTablePage.value
     );
   });
 
-  async function loadCryptoList() {
+  async function loadCryptoTable() {
     try {
-      loadingCryptoList.value = true;
+      loadingCryptoTable.value = true;
       const { data }: any = await useFetch(
         "https://api.coingecko.com/api/v3/coins/markets?vs_currency=brl&order=market_cap_desc&per_page=250&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d"
       );
-      cryptoList.value = data.value.map((item: any) => ({
+      cryptoTable.value = data.value.map((item: any) => ({
+        id: item.id,
         image: item.image,
         name: item.name,
         price: item.current_price,
@@ -49,17 +69,74 @@ export const useCryptos = defineStore("cryptos", () => {
       }));
     } catch (e) {
     } finally {
-      loadingCryptoList.value = false;
+      loadingCryptoTable.value = false;
     }
   }
 
+  function createCrypto(data: CryptoType) {
+    const transaction = createTransaction(0, data.amount);
+    cryptos.value.push({
+      ...data,
+      transactions: [transaction as TransactionType],
+    });
+  }
+
+  function removeCrypto(cryptoId: string) {
+    cryptos.value = cryptos.value.filter((data) => data.id !== cryptoId);
+  }
+
+  function calculateReservedValue(id: string, value: number, operator: number) {
+    cryptos.value = cryptos.value.map((crypto) => {
+      if (crypto.id !== id) return crypto;
+      const transaction = createTransaction(operator, value);
+      return {
+        ...crypto,
+        amount: (crypto.amount || 0) + value * operator,
+        transactions: [
+          ...(crypto.transactions as Array<TransactionType>),
+          transaction,
+        ],
+      };
+    });
+  }
+
+  function findCryptoById(cryptoId: string) {
+    return cryptos.value.find((crypto) => crypto.id === cryptoId);
+  }
+
+  function findCryptoListItemById(cryptoId: string) {
+    return cryptoTable.value.find((crypto) => crypto.id === cryptoId);
+  }
+
+  function createTransaction(type: number, value: number): TransactionType {
+    return {
+      uuid: uuidv4(),
+      createdAt: new Date().getTime(),
+      type,
+      value,
+    };
+  }
+
   return {
-    tableLimit,
-    tablePage,
-    loadingCryptoList,
-    tableNameFilter,
-    tableSize,
-    pagedCryptos,
-    loadCryptoList,
+    cryptoListLimit,
+    cryptoListPage,
+    cryptoListNameFilter,
+    cryptoTableLimit,
+    cryptoTablePage,
+    cryptoTableNameFilter,
+    loadingCryptoTable,
+
+    cryptoListSize,
+    pagedCryptoList,
+
+    cryptoTableSize,
+    pagedCryptoTable,
+
+    loadCryptoTable,
+    createCrypto,
+    removeCrypto,
+    calculateReservedValue,
+    findCryptoById,
+    findCryptoListItemById,
   };
 });
