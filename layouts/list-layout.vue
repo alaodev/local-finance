@@ -20,7 +20,7 @@ const props = withDefaults(defineProps<Props>(), {
       <slot name="list-content" />
     </div>
     <div class="list-layout__paginator">
-      <slot name="list-layout__paginator" />
+      <slot name="list-paginator" />
     </div>
   </div>
 </template>
@@ -31,5 +31,28 @@ const props = withDefaults(defineProps<Props>(), {
   display: flex;
   height: calc(100vh - 64px);
   justify-content: center;
+}
+
+.list-layout {
+  @media (min-width: 960px) {
+    display: grid;
+    grid-template-rows: 60px 1fr 60px;
+    height: calc(100vh - 100px);
+
+    .list-layout__filter {
+      align-items: center;
+      display: flex;
+    }
+
+    .list-layout__content {
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+
+    .list-layout__paginator {
+      align-items: center;
+      display: flex;
+    }
+  }
 }
 </style>

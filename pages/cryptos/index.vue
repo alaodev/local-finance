@@ -45,7 +45,7 @@ onMounted(() => loadCryptoTable());
         </v-col>
       </v-row>
     </template>
-    <template v-slot:list-layout__paginator>
+    <template v-slot:list-paginator>
       <v-row>
         <v-col cols="12">
           <v-pagination
