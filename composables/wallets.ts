@@ -30,6 +30,11 @@ export const useWallets = defineStore("wallets", () => {
       walletsLimit.value * walletsPage.value
     );
   });
+  const walletReservedAmount = computed(() => {
+    return Object.keys(wallets.value).reduce((acc, cur) => {
+      return (acc += wallets.value[cur].reserved);
+    }, 0);
+  });
 
   function loadWallet(uuid: string) {
     wallet.value = wallets.value.find(
@@ -106,6 +111,7 @@ export const useWallets = defineStore("wallets", () => {
 
     walletsSize,
     pagedWallets,
+    walletReservedAmount,
 
     loadWallet,
     createWallet,
