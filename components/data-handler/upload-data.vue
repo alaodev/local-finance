@@ -2,12 +2,13 @@
 const walletsStore = useWallets();
 const cryptosStore = useCryptos();
 
-const { wallets } = storeToRefs(walletsStore);
-const { cryptos, importingCryptoData } = storeToRefs(cryptosStore);
+const { wallets, importingWalletsData } = storeToRefs(walletsStore);
+const { cryptos, importingCryptosData } = storeToRefs(cryptosStore);
 
 function upload(event: Event) {
   try {
-    importingCryptoData.value = true;
+    importingWalletsData.value = true;
+    importingCryptosData.value = true;
     const files = (event.target as HTMLInputElement).files as FileList;
     if (files.length === 0) return;
     let fr = new FileReader();
@@ -20,7 +21,8 @@ function upload(event: Event) {
   } catch (e) {
     console.error(e);
   } finally {
-    importingCryptoData.value = false;
+    importingWalletsData.value = false;
+    importingCryptosData.value = false;
   }
 }
 

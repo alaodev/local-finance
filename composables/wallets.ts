@@ -7,6 +7,24 @@ import { TransactionType } from "~~/types/transaction";
 export const useWallets = defineStore("wallets", () => {
   const wallet: Ref<WalletType | undefined> = ref();
   const wallets: Ref<Array<WalletType>> = useStorage("vue-storage-wallets", []);
+  const walletsLimit = ref(6);
+  const walletsPage = ref(1);
+  const walletsNameFilter = ref("");
+
+  const importingWalletsData = ref(false);
+
+  const filteredWallets = computed(() => {
+    return wallets.value.filter((item) =>
+      sanitize(item.name).includes(sanitize(walletsNameFilter.value))
+    );
+  });
+  const walletsSize = computed(() => filteredWallets.value.length);
+  const pagedWallets = computed(() => {
+    return filteredWallets.value.slice(
+      (walletsPage.value - 1) * walletsLimit.value,
+      walletsLimit.value * walletsPage.value
+    );
+  });
 
   function loadWallet(uuid: string) {
     wallet.value = wallets.value.find(
@@ -70,6 +88,15 @@ export const useWallets = defineStore("wallets", () => {
   return {
     wallet,
     wallets,
+    walletsLimit,
+    walletsPage,
+    walletsNameFilter,
+
+    importingWalletsData,
+
+    walletsSize,
+    pagedWallets,
+
     loadWallet,
     createWallet,
     editWallet,

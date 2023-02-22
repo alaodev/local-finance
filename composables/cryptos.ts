@@ -16,7 +16,7 @@ export const useCryptos = defineStore("cryptos", () => {
   const cryptoTableNameFilter = ref("");
 
   const loadingCryptoTable = ref(false);
-  const importingCryptoData = ref(false);
+  const importingCryptosData = ref(false);
 
   const filteredCryptoList = computed(() => {
     return cryptos.value.filter((item) =>
@@ -44,7 +44,7 @@ export const useCryptos = defineStore("cryptos", () => {
     );
   });
   const workingCrypto = computed(
-    () => loadingCryptoTable.value || importingCryptoData.value
+    () => loadingCryptoTable.value || importingCryptosData.value
   );
 
   async function loadCryptoTable() {
@@ -133,7 +133,7 @@ export const useCryptos = defineStore("cryptos", () => {
     cryptoTableNameFilter,
 
     loadingCryptoTable,
-    importingCryptoData,
+    importingCryptosData,
     workingCrypto,
 
     cryptoListSize,
