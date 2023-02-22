@@ -10,6 +10,12 @@
             "title": "Criptos"
         }
     },
+    "appbar": {
+        "data": {
+            "import": "Importar dados",
+            "export": "Exportar dados"
+        }
+    },
     "pages": {
         "dashboard": {},
         "wallets": {

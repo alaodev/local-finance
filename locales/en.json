@@ -10,6 +10,12 @@
             "title": "Cryptos"
         }
     },
+    "appbar": {
+        "data": {
+            "import": "Import data",
+            "export": "Export data"
+        }
+    },
     "pages": {
         "dashboard": {},
         "wallets": {

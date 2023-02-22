@@ -10,7 +10,7 @@ const {
   cryptoListLimit,
   cryptoListSize,
   cryptoListNameFilter,
-  loadingCryptoTable,
+  workingCrypto,
 } = storeToRefs(cryptosStore);
 const { loadCryptoTable } = cryptosStore;
 
@@ -24,7 +24,7 @@ onMounted(() => loadCryptoTable());
 </script>
 
 <template>
-  <list-layout :loading="loadingCryptoTable">
+  <list-layout :loading="workingCrypto">
     <template v-slot:list-filter>
       <v-row>
         <v-spacer />
@@ -39,7 +39,7 @@ onMounted(() => loadCryptoTable());
       </v-row>
     </template>
     <template v-slot:list-content>
-      <v-row v-if="!loadingCryptoTable">
+      <v-row v-if="!workingCrypto">
         <v-col v-for="crypto of pagedCryptoList" cols="12" sm="6" md="4" xl="3">
           <crypto-card :crypto="crypto" :key="crypto.id" />
         </v-col>
