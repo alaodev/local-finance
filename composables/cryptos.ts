@@ -3,12 +3,14 @@ import { useStorage } from "@vueuse/core";
 import { v4 as uuidv4 } from "uuid";
 import { CryptoTableItemType, CryptoType } from "~~/types/cryptos";
 import { TransactionType } from "~~/types/transaction";
+import { dynamicSort } from "~~/utils/computers";
 
 export const useCryptos = defineStore("cryptos", () => {
   const cryptos: Ref<Array<CryptoType>> = useStorage("vue-storage-cryptos", []);
   const cryptoListLimit = ref(6);
   const cryptoListPage = ref(1);
   const cryptoListNameFilter = ref("");
+  const cryptoListOrderBy = ref("");
 
   const cryptoTable: Ref<Array<CryptoTableItemType>> = ref([]);
   const cryptoTableLimit = ref(10);
@@ -24,8 +26,11 @@ export const useCryptos = defineStore("cryptos", () => {
     );
   });
   const cryptoListSize = computed(() => filteredCryptoList.value.length);
+  const orderedCryptoList = computed(() =>
+    filteredCryptoList.value.sort(dynamicSort(cryptoListOrderBy.value))
+  );
   const pagedCryptoList = computed(() => {
-    return filteredCryptoList.value.slice(
+    return orderedCryptoList.value.slice(
       (cryptoListPage.value - 1) * cryptoListLimit.value,
       cryptoListLimit.value * cryptoListPage.value
     );
@@ -82,6 +87,7 @@ export const useCryptos = defineStore("cryptos", () => {
     const transaction = createTransaction(0, data.amount);
     cryptos.value.push({
       ...data,
+      createdAt: new Date().getTime(),
       transactions: [transaction as TransactionType],
     });
   }
@@ -122,6 +128,10 @@ export const useCryptos = defineStore("cryptos", () => {
     };
   }
 
+  function setCryptoListOrderBy(value: string) {
+    cryptoListOrderBy.value = value;
+  }
+
   return {
     cryptos,
 
@@ -148,5 +158,6 @@ export const useCryptos = defineStore("cryptos", () => {
     calculateReservedValue,
     findCryptoById,
     findCryptoListItemById,
+    setCryptoListOrderBy,
   };
 });

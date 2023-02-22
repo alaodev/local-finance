@@ -3,6 +3,7 @@ import { TransactionType } from "~~/types/transaction";
 
 export type WalletType = {
   uuid?: string;
+  createdAt?: number;
   goal?: number;
   name: string;
   reserved?: number;

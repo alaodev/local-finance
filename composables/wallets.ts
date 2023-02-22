@@ -3,6 +3,7 @@ import { useStorage } from "@vueuse/core";
 import { v4 as uuidv4 } from "uuid";
 import { WalletType } from "~~/types/wallet";
 import { TransactionType } from "~~/types/transaction";
+import { dynamicSort } from "~~/utils/computers";
 
 export const useWallets = defineStore("wallets", () => {
   const wallet: Ref<WalletType | undefined> = ref();
@@ -10,6 +11,7 @@ export const useWallets = defineStore("wallets", () => {
   const walletsLimit = ref(6);
   const walletsPage = ref(1);
   const walletsNameFilter = ref("");
+  const walletsOrderBy = ref("");
 
   const importingWalletsData = ref(false);
 
@@ -19,8 +21,11 @@ export const useWallets = defineStore("wallets", () => {
     );
   });
   const walletsSize = computed(() => filteredWallets.value.length);
+  const orderedWallets = computed(() =>
+    filteredWallets.value.sort(dynamicSort(walletsOrderBy.value))
+  );
   const pagedWallets = computed(() => {
-    return filteredWallets.value.slice(
+    return orderedWallets.value.slice(
       (walletsPage.value - 1) * walletsLimit.value,
       walletsLimit.value * walletsPage.value
     );
@@ -37,6 +42,7 @@ export const useWallets = defineStore("wallets", () => {
     wallets.value.push({
       ...data,
       uuid: uuidv4(),
+      createdAt: new Date().getTime(),
       transactions: [transaction as TransactionType],
     });
   }
@@ -85,6 +91,10 @@ export const useWallets = defineStore("wallets", () => {
     };
   }
 
+  function setWalletsOrderBy(value: string) {
+    walletsOrderBy.value = value;
+  }
+
   return {
     wallet,
     wallets,
@@ -102,5 +112,6 @@ export const useWallets = defineStore("wallets", () => {
     editWallet,
     removeWallet,
     calculateReservedValue,
+    setWalletsOrderBy,
   };
 });
