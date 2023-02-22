@@ -1,15 +1,23 @@
 <script lang="ts" setup>
 type Props = {
   loading?: boolean;
+  empty?: boolean;
 };
 
 const props = withDefaults(defineProps<Props>(), {
   loading: false,
+  empty: false,
 });
 </script>
 
 <template>
-  <div v-if="props.loading" class="list-layout-loading">
+  <div class="list-layout-empty" v-if="props.empty">
+    <v-icon icon="mdi-cactus" size="100" />
+    <span class="text-h5">
+      {{ $t("layouts.list-layout.empty") }}
+    </span>
+  </div>
+  <div v-else-if="props.loading" class="list-layout-loading">
     <v-progress-circular color="primary" size="90" width="12" indeterminate />
   </div>
   <div class="list-layout" v-else>
@@ -26,6 +34,13 @@ const props = withDefaults(defineProps<Props>(), {
 </template>
 
 <style lang="scss" scoped>
+.list-layout-empty {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 152px);
+  justify-content: center;
+}
 .list-layout-loading {
   align-items: center;
   display: flex;

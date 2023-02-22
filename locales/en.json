@@ -105,5 +105,10 @@
             "reserved-title": "Reserved value",
             "withdraw-title": "Withdraw value"
         }
+    },
+    "layouts": {
+        "list-layout": {
+            "empty": "No record found"
+        }
     }
 }

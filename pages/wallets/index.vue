@@ -5,6 +5,7 @@ import WalletCard from "~~/pages/wallets/components/wallet-card.vue";
 const walletsStore = useWallets();
 
 const {
+  wallets,
   walletsNameFilter,
   walletsPage,
   walletsLimit,
@@ -66,7 +67,7 @@ const paginationLength = computed(
 </script>
 
 <template>
-  <list-layout :loading="importingWalletsData">
+  <list-layout :empty="!wallets.length" :loading="importingWalletsData">
     <template v-slot:list-filter>
       <v-row>
         <v-spacer />

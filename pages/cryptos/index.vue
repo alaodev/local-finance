@@ -5,6 +5,7 @@ import CryptoCard from "~~/pages/cryptos/components/crypto-card.vue";
 const cryptosStore = useCryptos();
 
 const {
+  cryptos,
   pagedCryptoList,
   cryptoListPage,
   cryptoListLimit,
@@ -67,7 +68,7 @@ onMounted(() => loadCryptoTable());
 </script>
 
 <template>
-  <list-layout :loading="workingCrypto">
+  <list-layout :empty="!cryptos.length" :loading="workingCrypto">
     <template v-slot:list-filter>
       <v-row>
         <v-spacer />
