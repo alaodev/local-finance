@@ -51,6 +51,14 @@ export const useCryptos = defineStore("cryptos", () => {
   const workingCrypto = computed(
     () => loadingCryptoTable.value || importingCryptosData.value
   );
+  const cryptosValueAmount = computed(() => {
+    return Object.keys(cryptos.value).reduce((acc, cur) => {
+      const cryptoCurrentValue =
+        cryptoTable.value.find((crypto) => crypto.id === cryptos.value[cur].id)
+          ?.price || 0;
+      return (acc += cryptos.value[cur].amount * cryptoCurrentValue);
+    }, 0);
+  });
 
   async function loadCryptoTable() {
     try {
@@ -148,6 +156,7 @@ export const useCryptos = defineStore("cryptos", () => {
 
     cryptoListSize,
     pagedCryptoList,
+    cryptosValueAmount,
 
     cryptoTableSize,
     pagedCryptoTable,
