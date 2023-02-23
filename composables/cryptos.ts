@@ -6,6 +6,10 @@ import { TransactionType } from "~~/types/transaction";
 import { dynamicSort } from "~~/utils/computers";
 
 export const useCryptos = defineStore("cryptos", () => {
+  const requestRegulatorStore = useRequestRegulator();
+
+  const { validate: validateRequestRegulator } = requestRegulatorStore;
+
   const cryptos: Ref<Array<CryptoType>> = useStorage("vue-storage-cryptos", []);
   const cryptoListLimit = ref(6);
   const cryptoListPage = ref(1);
@@ -61,6 +65,11 @@ export const useCryptos = defineStore("cryptos", () => {
   });
 
   async function loadCryptoTable() {
+    const isValidRequestRegulator = validateRequestRegulator(
+      "LOAD_CRYPTO",
+      60000
+    );
+    if (!isValidRequestRegulator) return;
     try {
       loadingCryptoTable.value = true;
       const { data }: any = await useFetch(
