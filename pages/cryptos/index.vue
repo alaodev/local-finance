@@ -68,7 +68,7 @@ onMounted(() => loadCryptoTable());
 </script>
 
 <template>
-  <list-layout :empty="!cryptos.length" :loading="workingCrypto">
+  <list-layout :empty="!cryptos.size" :loading="workingCrypto">
     <template v-slot:list-filter>
       <v-row>
         <v-spacer />

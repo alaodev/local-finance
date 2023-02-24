@@ -6,7 +6,7 @@ const { wallets } = walletsStore;
 const { cryptos } = cryptosStore;
 
 function download() {
-  const data = { wallets, cryptos };
+  const data = { wallets, cryptos: Array.from(cryptos) };
   const dataStr = `data:text/json;charset=utf-8,${encodeURIComponent(
     JSON.stringify(data)
   )}`;

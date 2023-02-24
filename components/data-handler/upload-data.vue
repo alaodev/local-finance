@@ -15,7 +15,7 @@ function upload(event: Event) {
     fr.onload = function (e) {
       let result = JSON.parse((e.target as FileReader).result as string);
       wallets.value = result.wallets;
-      cryptos.value = result.cryptos;
+      cryptos.value = new Map(result.cryptos);
     };
     fr.readAsText(files[0]);
   } catch (e) {

@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { Ref } from "vue";
-import { CryptoListItemType, CryptoType } from "~~/types/cryptos";
+import { CryptoTableItemType, CryptoType } from "~~/types/cryptos";
 
 import { currency } from "~~/utils/formatters";
 
@@ -12,17 +12,17 @@ const cryptosStore = useCryptos();
 const route = useRoute();
 const i18n = useI18n();
 
-const { loadingCryptoList } = storeToRefs(cryptosStore);
+const { loadingCryptoTable } = storeToRefs(cryptosStore);
 
-const { loadCryptoTable, findCryptoListItemById } = cryptosStore;
+const { loadCryptoTable, findCryptoTableItemById } = cryptosStore;
 const { locale } = i18n;
 
-const currentCrypto: Ref<CryptoListItemType | undefined> = ref();
+const currentCrypto: Ref<CryptoTableItemType | undefined> = ref();
 watch(
   () => route.params.id,
   async (value) => {
     await loadCryptoTable();
-    currentCrypto.value = findCryptoListItemById(value as string);
+    currentCrypto.value = findCryptoTableItemById(value as string);
   },
   {
     immediate: true,
@@ -60,7 +60,7 @@ function validate() {
     </v-row>
     <v-row>
       <v-col class="d-flex justify-center" cols="12">
-        <span class="text-h5" v-if="!loadingCryptoList">
+        <span class="text-h5" v-if="!loadingCryptoTable">
           {{ currency(currentCrypto?.price, locale) }} por moeda
         </span>
       </v-col>

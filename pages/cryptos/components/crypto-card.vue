@@ -16,10 +16,10 @@ const props = defineProps<Props>();
 const crytosStore = useCryptos();
 const i18n = useI18n();
 
-const { findCryptoListItemById } = crytosStore;
+const { findCryptoTableItemById } = crytosStore;
 const { locale } = i18n;
 
-const cryptoInfos = computed(() => findCryptoListItemById(props.crypto.id));
+const cryptoInfos = computed(() => findCryptoTableItemById(props.crypto.id));
 const cryptoValue = computed(
   () => (cryptoInfos.value?.price as number) * props.crypto.amount
 );

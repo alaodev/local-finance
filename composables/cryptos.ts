@@ -13,14 +13,17 @@ export const useCryptos = defineStore("cryptos", () => {
   const { validate: validateRequestRegulator } = requestRegulatorStore;
   const { name: displayName } = useDisplay();
 
-  const cryptos: Ref<Array<CryptoType>> = useStorage("vue-storage-cryptos", []);
+  const cryptos: Ref<Map<string, CryptoType>> = useStorage(
+    "vue-storage-cryptos",
+    new Map()
+  );
   const cryptoListPage = ref(1);
   const cryptoListNameFilter = ref("");
   const cryptoListOrderBy = ref("");
 
-  const cryptoTable: Ref<Array<CryptoTableItemType>> = useStorage(
+  const cryptoTable: Ref<Map<string, CryptoTableItemType>> = useStorage(
     "vue-storage-crypto-table",
-    []
+    new Map()
   );
   const cryptoTableLimit = ref(10);
   const cryptoTablePage = ref(1);
@@ -34,9 +37,12 @@ export const useCryptos = defineStore("cryptos", () => {
     return displayToLimit(displayName.value);
   });
   const filteredCryptoList = computed(() => {
-    return cryptos.value.filter((item) =>
-      sanitize(item.name).includes(sanitize(cryptoListNameFilter.value))
-    );
+    const result = [];
+    for (let crypto of cryptos.value.values()) {
+      if (sanitize(crypto.name).includes(sanitize(cryptoListNameFilter.value)))
+        result.push(crypto);
+    }
+    return result;
   });
   const cryptoListSize = computed(() => filteredCryptoList.value.length);
   const orderedCryptoList = computed(() =>
@@ -49,9 +55,12 @@ export const useCryptos = defineStore("cryptos", () => {
     );
   });
   const filteredCryptoTable = computed(() => {
-    return cryptoTable.value.filter((item) =>
-      sanitize(item.name).includes(sanitize(cryptoTableNameFilter.value))
-    );
+    const result = [];
+    for (let crypto of cryptoTable.value.values()) {
+      if (sanitize(crypto.name).includes(sanitize(cryptoTableNameFilter.value)))
+        result.push(crypto);
+    }
+    return result;
   });
   const cryptoTableSize = computed(() => filteredCryptoTable.value.length);
   const pagedCryptoTable = computed(() => {
@@ -64,18 +73,18 @@ export const useCryptos = defineStore("cryptos", () => {
     () => loadingCryptoTable.value || importingCryptosData.value
   );
   const cryptosValueAmount = computed(() => {
-    return Object.keys(cryptos.value).reduce((acc, cur) => {
-      const cryptoCurrentValue =
-        cryptoTable.value.find((crypto) => crypto.id === cryptos.value[cur].id)
-          ?.price || 0;
-      return (acc += cryptos.value[cur].amount * cryptoCurrentValue);
-    }, 0);
+    let valueAmount = 0;
+    for (let crypto of cryptos.value.values()) {
+      const cryptoTableItemInfos = findCryptoTableItemById(crypto.id);
+      valueAmount += (cryptoTableItemInfos?.price as number) * crypto.amount;
+    }
+    return valueAmount;
   });
 
   async function loadCryptoTable() {
     const isValidRequestRegulator = validateRequestRegulator(
       "LOAD_CRYPTO",
-      60000
+      30000
     );
     if (!isValidRequestRegulator) return;
     try {
@@ -83,25 +92,22 @@ export const useCryptos = defineStore("cryptos", () => {
       const { data }: any = await useFetch(
         "https://api.coingecko.com/api/v3/coins/markets?vs_currency=brl&order=market_cap_desc&per_page=250&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d"
       );
-      cryptoTable.value = data.value.map((item: any) => ({
-        id: item.id,
-        image: item.image,
-        name: item.name,
-        price: item.current_price,
-        percentageIn1h: Number(
-          item.price_change_percentage_1h_in_currency
-        ).toFixed(2),
-        percentageIn24h: Number(
-          item.price_change_percentage_24h_in_currency
-        ).toFixed(2),
-        percentageIn7d: Number(
-          item.price_change_percentage_7d_in_currency
-        ).toFixed(2),
-        sparklineData: Object.entries(item.sparkline_in_7d.price).map(
-          ([key, value]) => value
-        ),
-        symbol: item.symbol,
-      }));
+      for (let item of data.value) {
+        const newCryptoTableItem = {
+          id: item.id,
+          image: item.image,
+          name: item.name,
+          price: item.current_price,
+          percentageIn1h: item.price_change_percentage_1h_in_currency,
+          percentageIn24h: item.price_change_percentage_24h_in_currency,
+          percentageIn7d: item.price_change_percentage_7d_in_currency,
+          sparklineData: Object.entries(item.sparkline_in_7d.price).map(
+            ([key, value]) => value
+          ) as Array<number>,
+          symbol: item.symbol,
+        };
+        cryptoTable.value.set(item.id, newCryptoTableItem);
+      }
     } catch (e) {
     } finally {
       loadingCryptoTable.value = false;
@@ -110,38 +116,37 @@ export const useCryptos = defineStore("cryptos", () => {
 
   function createCrypto(data: CryptoType) {
     const transaction = createTransaction(0, data.amount);
-    cryptos.value.push({
+    const newCrypto = {
       ...data,
       createdAt: new Date().getTime(),
       transactions: [transaction as TransactionType],
-    });
+    };
+    cryptos.value.set(data.id, newCrypto);
   }
 
   function removeCrypto(cryptoId: string) {
-    cryptos.value = cryptos.value.filter((data) => data.id !== cryptoId);
+    cryptos.value.delete(cryptoId);
   }
 
   function calculateReservedValue(id: string, value: number, operator: number) {
-    cryptos.value = cryptos.value.map((crypto) => {
-      if (crypto.id !== id) return crypto;
-      const transaction = createTransaction(operator, value);
-      return {
-        ...crypto,
-        amount: (crypto.amount || 0) + value * operator,
-        transactions: [
-          ...(crypto.transactions as Array<TransactionType>),
-          transaction,
-        ],
-      };
-    });
+    const crypto = cryptos.value.get(id) as CryptoType;
+    const transaction = createTransaction(operator, value);
+    return {
+      ...crypto,
+      amount: (crypto.amount || 0) + value * operator,
+      transactions: [
+        ...(crypto.transactions as Array<TransactionType>),
+        transaction,
+      ],
+    };
   }
 
   function findCryptoById(cryptoId: string) {
-    return cryptos.value.find((crypto) => crypto.id === cryptoId);
+    return cryptos.value.get(cryptoId);
   }
 
-  function findCryptoListItemById(cryptoId: string) {
-    return cryptoTable.value.find((crypto) => crypto.id === cryptoId);
+  function findCryptoTableItemById(cryptoId: string) {
+    return cryptoTable.value.get(cryptoId);
   }
 
   function createTransaction(type: number, value: number): TransactionType {
@@ -183,7 +188,7 @@ export const useCryptos = defineStore("cryptos", () => {
     removeCrypto,
     calculateReservedValue,
     findCryptoById,
-    findCryptoListItemById,
+    findCryptoTableItemById,
     setCryptoListOrderBy,
   };
 });

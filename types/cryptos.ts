@@ -17,6 +17,6 @@ export type CryptoTableItemType = {
 
 export type CryptoType = {
   amount: number;
-  createdAt: number;
+  createdAt?: number;
   transactions?: Array<TransactionType>;
 } & CrytoBaseType;

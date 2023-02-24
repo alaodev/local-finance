@@ -19,12 +19,15 @@ const indicator = computed(() => {
     };
   return {};
 });
+const percentualValue = computed(() =>
+  Number(Math.abs(props.value)).toFixed(2)
+);
 </script>
 
 <template>
   <div :class="`${indicator.color} d-flex`">
     <v-icon :icon="indicator.icon" />
-    <strong> {{ Math.abs(props.value) }}% </strong>
+    <strong> {{ percentualValue }}% </strong>
     <v-tooltip v-if="props.tooltip" activator="parent" location="top">
       {{ props.tooltip }}
     </v-tooltip>
