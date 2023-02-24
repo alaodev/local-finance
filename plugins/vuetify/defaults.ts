@@ -11,7 +11,7 @@ export default {
   },
   VPagination: {
     ellipsis: "...",
-    totalVisible: 5,
+    totalVisible: 4,
   },
   VSelect: {
     clearable: true,

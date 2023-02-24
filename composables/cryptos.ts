@@ -4,14 +4,16 @@ import { v4 as uuidv4 } from "uuid";
 import { CryptoTableItemType, CryptoType } from "~~/types/cryptos";
 import { TransactionType } from "~~/types/transaction";
 import { dynamicSort } from "~~/utils/computers";
+import { displayToLimit } from "~~/utils/converters";
+import { useDisplay } from "vuetify/lib/framework.mjs";
 
 export const useCryptos = defineStore("cryptos", () => {
   const requestRegulatorStore = useRequestRegulator();
 
   const { validate: validateRequestRegulator } = requestRegulatorStore;
+  const { name: displayName } = useDisplay();
 
   const cryptos: Ref<Array<CryptoType>> = useStorage("vue-storage-cryptos", []);
-  const cryptoListLimit = ref(6);
   const cryptoListPage = ref(1);
   const cryptoListNameFilter = ref("");
   const cryptoListOrderBy = ref("");
@@ -24,6 +26,10 @@ export const useCryptos = defineStore("cryptos", () => {
   const loadingCryptoTable = ref(false);
   const importingCryptosData = ref(false);
 
+  const cryptoListLimit = computed(() => {
+    cryptoListPage.value = 1;
+    return displayToLimit(displayName.value);
+  });
   const filteredCryptoList = computed(() => {
     return cryptos.value.filter((item) =>
       sanitize(item.name).includes(sanitize(cryptoListNameFilter.value))
@@ -39,7 +45,6 @@ export const useCryptos = defineStore("cryptos", () => {
       cryptoListLimit.value * cryptoListPage.value
     );
   });
-
   const filteredCryptoTable = computed(() => {
     return cryptoTable.value.filter((item) =>
       sanitize(item.name).includes(sanitize(cryptoTableNameFilter.value))

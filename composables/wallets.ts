@@ -4,17 +4,24 @@ import { v4 as uuidv4 } from "uuid";
 import { WalletType } from "~~/types/wallet";
 import { TransactionType } from "~~/types/transaction";
 import { dynamicSort } from "~~/utils/computers";
+import { displayToLimit } from "~~/utils/converters";
+import { useDisplay } from "vuetify/lib/framework.mjs";
 
 export const useWallets = defineStore("wallets", () => {
+  const { name: displayName } = useDisplay();
+
   const wallet: Ref<WalletType | undefined> = ref();
   const wallets: Ref<Array<WalletType>> = useStorage("vue-storage-wallets", []);
-  const walletsLimit = ref(6);
   const walletsPage = ref(1);
   const walletsNameFilter = ref("");
   const walletsOrderBy = ref("");
 
   const importingWalletsData = ref(false);
 
+  const walletsLimit = computed(() => {
+    walletsPage.value = 1;
+    return displayToLimit(displayName.value);
+  });
   const filteredWallets = computed(() => {
     return wallets.value.filter((item) =>
       sanitize(item.name).includes(sanitize(walletsNameFilter.value))
