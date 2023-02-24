@@ -18,7 +18,10 @@ export const useCryptos = defineStore("cryptos", () => {
   const cryptoListNameFilter = ref("");
   const cryptoListOrderBy = ref("");
 
-  const cryptoTable: Ref<Array<CryptoTableItemType>> = ref([]);
+  const cryptoTable: Ref<Array<CryptoTableItemType>> = useStorage(
+    "vue-storage-crypto-table",
+    []
+  );
   const cryptoTableLimit = ref(10);
   const cryptoTablePage = ref(1);
   const cryptoTableNameFilter = ref("");
