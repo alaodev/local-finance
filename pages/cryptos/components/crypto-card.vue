@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { currency } from "~~/utils/formatters";
+import { currencyNumber } from "~~/utils/formatters";
 import { CryptoType } from "~~/types/cryptos";
 
 import PercentIndicator from "./percent-indicator.vue";
@@ -13,8 +13,11 @@ type Props = {
 
 const props = defineProps<Props>();
 
+const currencyStore = useCurrency();
 const crytosStore = useCryptos();
 const i18n = useI18n();
+
+const { currency } = storeToRefs(currencyStore);
 
 const { findCryptoTableItemById } = crytosStore;
 const { locale } = i18n;
@@ -58,7 +61,9 @@ const cryptoValue = computed(
               <sub class="text-h6">{{
                 localeNumber(props.crypto.amount, locale)
               }}</sub>
-              <span class="text-h5">{{ currency(cryptoValue, locale) }}</span>
+              <span class="text-h5">{{
+                currencyNumber(cryptoValue, currency)
+              }}</span>
               <div class="card-sparkline">
                 <sparkline :data="cryptoInfos?.sparklineData" />
               </div>

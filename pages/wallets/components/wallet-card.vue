@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { currency } from "~~/utils/formatters";
+import { currencyNumber } from "~~/utils/formatters";
 import { WalletType } from "~~/types/wallet";
 
 import WalletDialog from "~~/pages/wallets/components/wallet-dialog.vue";
@@ -10,7 +10,9 @@ type Props = {
 
 const props = defineProps<Props>();
 
-const { locale } = useI18n();
+const currencyStore = useCurrency();
+
+const { currency } = storeToRefs(currencyStore);
 
 const goalPercentage = computed(() => {
   if (props.wallet.goal) {
@@ -56,7 +58,7 @@ const goalPercentage = computed(() => {
                 $t("pages.wallets.index.wallet-card.money-header")
               }}</span>
               <span class="text-h5">{{
-                currency(props.wallet.reserved, locale)
+                currencyNumber(props.wallet.reserved, currency)
               }}</span>
             </v-col>
             <v-col cols="4" class="align-center d-flex justify-center">
@@ -78,7 +80,7 @@ const goalPercentage = computed(() => {
         <span>{{ $t("pages.wallets.index.wallet-card.goal-text") }}</span>
         <strong>{{
           props.wallet.goal
-            ? currency(props.wallet.goal, locale)
+            ? currencyNumber(props.wallet.goal, currency)
             : $t("pages.wallets.index.wallet-card.goal-not-defined")
         }}</strong>
       </v-col>

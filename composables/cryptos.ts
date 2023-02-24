@@ -9,9 +9,12 @@ import { useDisplay } from "vuetify/lib/framework.mjs";
 
 export const useCryptos = defineStore("cryptos", () => {
   const requestRegulatorStore = useRequestRegulator();
+  const currencyStore = useCurrency();
+
+  const { currency } = storeToRefs(currencyStore);
+  const { name: displayName } = useDisplay();
 
   const { validate: validateRequestRegulator } = requestRegulatorStore;
-  const { name: displayName } = useDisplay();
 
   const cryptos: Ref<Map<string, CryptoType>> = useStorage(
     "vue-storage-cryptos",
@@ -81,16 +84,18 @@ export const useCryptos = defineStore("cryptos", () => {
     return valueAmount;
   });
 
-  async function loadCryptoTable() {
-    const isValidRequestRegulator = validateRequestRegulator(
-      "LOAD_CRYPTO",
-      30000
-    );
-    if (!isValidRequestRegulator) return;
+  async function loadCryptoTable(force: boolean = false) {
+    if (!force) {
+      const isValidRequestRegulator = validateRequestRegulator(
+        "LOAD_CRYPTO",
+        30000
+      );
+      if (!isValidRequestRegulator) return;
+    }
     try {
       loadingCryptoTable.value = true;
       const { data }: any = await useFetch(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=brl&order=market_cap_desc&per_page=250&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d"
+        `https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency.value}&order=market_cap_desc&per_page=250&page=1&sparkline=true&price_change_percentage=1h%2C24h%2C7d`
       );
       for (let item of data.value) {
         const newCryptoTableItem = {
@@ -161,6 +166,8 @@ export const useCryptos = defineStore("cryptos", () => {
   function setCryptoListOrderBy(value: string) {
     cryptoListOrderBy.value = value;
   }
+
+  watch(currency, async () => await loadCryptoTable(true));
 
   return {
     cryptos,

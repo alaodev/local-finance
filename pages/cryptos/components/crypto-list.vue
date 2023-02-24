@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { currency } from "~~/utils/formatters";
+import { currencyNumber } from "~~/utils/formatters";
 
 import { CryptoTableItemType } from "~~/types/cryptos";
 
@@ -12,8 +12,10 @@ type Props = {
 
 const props = defineProps<Props>();
 
+const currencyStore = useCurrency();
+
+const { currency } = storeToRefs(currencyStore);
 const { height } = useWindowSize();
-const { locale } = useI18n();
 
 const tableHeight = computed(() => height.value - 540);
 </script>
@@ -63,7 +65,7 @@ const tableHeight = computed(() => height.value - 540);
           <percent-indicator :value="item.percentageIn7d" />
         </td>
         <td class="text-right">
-          {{ currency(item.price, locale) }}
+          {{ currencyNumber(item.price, currency) }}
         </td>
         <td align="center">
           <div :style="'height: 80px; width: 120px'">

@@ -2,20 +2,20 @@
 import { Ref } from "vue";
 import { CryptoTableItemType, CryptoType } from "~~/types/cryptos";
 
-import { currency } from "~~/utils/formatters";
+import { currencyNumber } from "~~/utils/formatters";
 
 defineExpose({
   validate,
 });
 
 const cryptosStore = useCryptos();
+const currencyStore = useCurrency();
 const route = useRoute();
-const i18n = useI18n();
 
 const { loadingCryptoTable } = storeToRefs(cryptosStore);
+const { currency } = storeToRefs(currencyStore);
 
 const { loadCryptoTable, findCryptoTableItemById } = cryptosStore;
-const { locale } = i18n;
 
 const currentCrypto: Ref<CryptoTableItemType | undefined> = ref();
 watch(
@@ -61,7 +61,7 @@ function validate() {
     <v-row>
       <v-col class="d-flex justify-center" cols="12">
         <span class="text-h5" v-if="!loadingCryptoTable">
-          {{ currency(currentCrypto?.price, locale) }} por moeda
+          {{ currencyNumber(currentCrypto?.price, currency) }} por moeda
         </span>
       </v-col>
     </v-row>

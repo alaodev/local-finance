@@ -4,18 +4,17 @@ export function capitalize(value: string) {
   return value.replace(/^\w/, (v) => v.toUpperCase());
 }
 
-export function currency(value: string | number = 0, localeCode: string) {
-  const locale = {
-    en: {
-      currency: "USD",
-    },
-    "pt-br": {
-      currency: "BRL",
-    },
+export function currencyNumber(
+  value: string | number = 0,
+  currencyCode: string
+) {
+  const currencyToLocale: { [key: string]: string } = {
+    usd: "en",
+    brl: "pt-br",
   };
-  return Number(value).toLocaleString(localeCode, {
+  return Number(value).toLocaleString(currencyToLocale[currencyCode], {
     style: "currency",
-    currency: locale[localeCode].currency,
+    currency: currencyCode,
   });
 }
 
