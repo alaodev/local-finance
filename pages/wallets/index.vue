@@ -67,7 +67,7 @@ const paginationLength = computed(
 </script>
 
 <template>
-  <list-layout :empty="!wallets.length" :loading="importingWalletsData">
+  <list-layout :empty="!wallets.size" :loading="importingWalletsData">
     <template v-slot:list-filter>
       <v-row>
         <v-spacer />

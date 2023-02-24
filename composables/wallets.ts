@@ -11,7 +11,10 @@ export const useWallets = defineStore("wallets", () => {
   const { name: displayName } = useDisplay();
 
   const wallet: Ref<WalletType | undefined> = ref();
-  const wallets: Ref<Array<WalletType>> = useStorage("vue-storage-wallets", []);
+  const wallets: Ref<Map<string, WalletType>> = useStorage(
+    "vue-storage-wallets",
+    new Map()
+  );
   const walletsPage = ref(1);
   const walletsNameFilter = ref("");
   const walletsOrderBy = ref("");
@@ -23,9 +26,12 @@ export const useWallets = defineStore("wallets", () => {
     return displayToLimit(displayName.value);
   });
   const filteredWallets = computed(() => {
-    return wallets.value.filter((item) =>
-      sanitize(item.name).includes(sanitize(walletsNameFilter.value))
-    );
+    const result = [];
+    for (let wallet of wallets.value.values()) {
+      if (sanitize(wallet.name).includes(sanitize(walletsNameFilter.value)))
+        result.push(wallet);
+    }
+    return result;
   });
   const walletsSize = computed(() => filteredWallets.value.length);
   const orderedWallets = computed(() =>
@@ -38,41 +44,39 @@ export const useWallets = defineStore("wallets", () => {
     );
   });
   const walletsReservedAmount = computed(() => {
-    return Object.keys(wallets.value).reduce((acc, cur) => {
-      return (acc += wallets.value[cur].reserved);
-    }, 0);
+    let reservedAmount = 0;
+    for (let wallet of wallets.value.values()) {
+      reservedAmount += wallet.reserved || 0;
+    }
+    return reservedAmount;
   });
 
   function loadWallet(uuid: string) {
-    wallet.value = wallets.value.find(
-      (wallet) => wallet.uuid === uuid
-    ) as WalletType;
+    wallet.value = wallets.value.get(uuid);
   }
 
   function createWallet(data: WalletType) {
+    const uuid = uuidv4();
     const transaction = createTransaction(0, data.reserved as number);
-    wallets.value.push({
+    const newWallet = {
       ...data,
-      uuid: uuidv4(),
+      uuid,
       createdAt: new Date().getTime(),
       transactions: [transaction as TransactionType],
-    });
+    };
+    wallets.value.set(uuid, newWallet);
   }
 
   function editWallet(walletData: WalletType) {
-    wallets.value = wallets.value.map((data) => {
-      if (data.uuid !== wallet.value?.uuid) return data;
-      return {
-        ...wallet.value,
-        ...walletData,
-      };
-    });
+    const editData = {
+      ...wallet.value,
+      ...walletData,
+    };
+    wallets.value.set(wallet.value?.uuid as string, editData);
   }
 
   function removeWallet() {
-    wallets.value = wallets.value.filter(
-      (data) => data.uuid !== wallet.value?.uuid
-    );
+    wallets.value.delete(wallet.value?.uuid as string);
   }
 
   function calculateReservedValue(
@@ -80,18 +84,16 @@ export const useWallets = defineStore("wallets", () => {
     value: number,
     operator: number
   ) {
-    wallets.value = wallets.value.map((wallet) => {
-      if (wallet.uuid !== uuid) return wallet;
-      const transaction = createTransaction(operator, value);
-      return {
-        ...wallet,
-        reserved: (wallet.reserved || 0) + value * operator,
-        transactions: [
-          ...(wallet.transactions as Array<TransactionType>),
-          transaction,
-        ],
-      };
-    });
+    const wallet = wallets.value.get(uuid);
+    const transaction = createTransaction(operator, value);
+    return {
+      ...wallet,
+      reserved: (wallet?.reserved || 0) + value * operator,
+      transactions: [
+        ...(wallet?.transactions as Array<TransactionType>),
+        transaction,
+      ],
+    };
   }
 
   function createTransaction(type: number, value: number): TransactionType {
