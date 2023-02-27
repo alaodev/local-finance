@@ -13,6 +13,8 @@ const props = defineProps<Props>();
     :title="$t('pages.dashboard.equity-category-card.title')"
     :subtitle="$t('pages.dashboard.equity-category-card.subtitle')"
     class="pa-6"
+    min-height="225"
+    prepend-icon="mdi-shape-outline"
   >
     <v-sheet class="pa-6">
       <v-row>

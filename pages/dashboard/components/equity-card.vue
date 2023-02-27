@@ -17,6 +17,8 @@ const { currency } = storeToRefs(currencyStore);
     :title="$t('pages.dashboard.total-equity-card.title')"
     :subtitle="$t('pages.dashboard.total-equity-card.subtitle')"
     class="pa-6"
+    min-height="225"
+    prepend-icon="mdi-trophy-outline"
   >
     <v-sheet class="pa-6">
       <span class="text-h4 text-primary">
