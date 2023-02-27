@@ -30,7 +30,8 @@
                 "subtitle": "Patrimônio separado por categoria",
                 "equity-category-card-items": {
                     "wallets": "Carteiras",
-                    "cryptos": "Criptos"
+                    "cryptos": "Criptos",
+                    "stocks": "Ações"
                 }
             }
         },

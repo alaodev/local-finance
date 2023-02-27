@@ -4,6 +4,7 @@ import EquityCategory from "./components/equity-category/index.vue";
 
 const walletsStore = useWallets();
 const cryptosStore = useCryptos();
+const stocksStore = useStocks();
 const i18n = useI18n();
 
 const { loadCryptoTable } = cryptosStore;
@@ -11,9 +12,13 @@ const { t } = i18n;
 
 const { walletsReservedAmount } = storeToRefs(walletsStore);
 const { cryptosValueAmount } = storeToRefs(cryptosStore);
+const { stocksValueAmount } = storeToRefs(stocksStore);
 
 const equityValue = computed(
-  () => walletsReservedAmount.value + cryptosValueAmount.value
+  () =>
+    walletsReservedAmount.value +
+    cryptosValueAmount.value +
+    stocksValueAmount.value
 );
 const equityCategoryItems = computed(() => [
   {
@@ -31,6 +36,14 @@ const equityCategoryItems = computed(() => [
       "pages.dashboard.equity-category-card.equity-category-card-items.cryptos"
     ),
     value: cryptosValueAmount.value,
+  },
+  {
+    color: "green",
+    icon: "mdi-chart-areaspline-variant",
+    title: t(
+      "pages.dashboard.equity-category-card.equity-category-card-items.stocks"
+    ),
+    value: stocksValueAmount.value,
   },
 ]);
 

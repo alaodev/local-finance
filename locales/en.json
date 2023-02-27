@@ -30,7 +30,8 @@
                 "subtitle": "Equity separated by category",
                 "equity-category-card-items": {
                     "wallets": "Wallets",
-                    "cryptos": "Cryptos"
+                    "cryptos": "Cryptos",
+                    "stocks": "Stocks"
                 }
             }
         },
