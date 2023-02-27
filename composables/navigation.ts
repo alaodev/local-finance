@@ -31,7 +31,7 @@ export const useNavigation = defineStore("navigation", () => {
         to: "/cryptos/",
       },
       title: cryptosTitle,
-      value: "cryptops",
+      value: "cryptos",
     },
   ]);
 
