@@ -94,15 +94,23 @@ export const useStocks = defineStore("stocks", () => {
     }
     try {
       loadingStockTable.value = true;
-      const { data }: any = await useFetch(
+      let currencyMultiplier = 1;
+      if (currency.value !== "brl") {
+        const { data: conversionData }: any = await useFetch(
+          `https://brapi.dev/api/v2/currency?currency=BRL-${currency.value.toUpperCase()}`
+        );
+        currencyMultiplier = conversionData.value.currency[0].askPrice;
+        console.log(currencyMultiplier);
+      }
+      const { data: stocksData }: any = await useFetch(
         "https://brapi.dev/api/quote/list?sortBy=close&sortOrder=desc"
       );
-      for (let item of data.value.stocks) {
+      for (let item of stocksData.value.stocks) {
         const newStockTableItem = {
           id: item.stock,
           image: item.logo,
           name: item.name,
-          price: item.close,
+          price: item.close * currencyMultiplier,
           symbol: item.stock,
         };
         stockTable.value.set(item.stock, newStockTableItem);
@@ -158,7 +166,7 @@ export const useStocks = defineStore("stocks", () => {
     stockListOrderBy.value = value;
   }
 
-  watch(currency, async () => await loadStockTable(true));
+  watch(currency, async () => await loadStockTable(true), { immediate: true });
 
   return {
     stocks,
