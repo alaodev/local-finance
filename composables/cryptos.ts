@@ -133,6 +133,10 @@ export const useCryptos = defineStore("cryptos", () => {
     cryptos.value.delete(cryptoId);
   }
 
+  function removeAllCryptos() {
+    cryptos.value.clear();
+  }
+
   function calculateReservedValue(id: string, value: number, operator: number) {
     const crypto = cryptos.value.get(id) as CryptoType;
     const transaction = createTransaction(operator, value);
@@ -190,6 +194,7 @@ export const useCryptos = defineStore("cryptos", () => {
     loadCryptoTable,
     createCrypto,
     removeCrypto,
+    removeAllCryptos,
     calculateReservedValue,
     findCryptoById,
     findCryptoTableItemById,

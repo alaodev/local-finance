@@ -135,6 +135,10 @@ export const useStocks = defineStore("stocks", () => {
     stocks.value.delete(stockId);
   }
 
+  function removeAllStocks() {
+    stocks.value.clear();
+  }
+
   function calculateReservedValue(id: string, value: number, operator: number) {
     const stock = stocks.value.get(id) as StockType;
     const transaction = createTransaction(operator, value);
@@ -192,6 +196,7 @@ export const useStocks = defineStore("stocks", () => {
     loadStockTable,
     createStock,
     removeStock,
+    removeAllStocks,
     calculateReservedValue,
     findStockById,
     findStockTableItemById,

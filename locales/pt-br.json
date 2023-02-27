@@ -16,7 +16,15 @@
     "appbar": {
         "data": {
             "import": "Importar dados",
-            "export": "Exportar dados"
+            "export": "Exportar dados",
+            "delete": {
+                "delete-list-item": "Deletar dados",
+                "delete-dialog": {
+                    "title": "Tem certeza que deseja deletar todos os dados?",
+                    "subtitle": "Essa ação não poderá ser revertida",
+                    "close": "Fechar"
+                }
+            }
         }
     },
     "pages": {

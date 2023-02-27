@@ -79,6 +79,10 @@ export const useWallets = defineStore("wallets", () => {
     wallets.value.delete(wallet.value?.uuid as string);
   }
 
+  function removeAllWallets() {
+    wallets.value.clear();
+  }
+
   function calculateReservedValue(
     uuid: string,
     value: number,
@@ -123,6 +127,7 @@ export const useWallets = defineStore("wallets", () => {
     createWallet,
     editWallet,
     removeWallet,
+    removeAllWallets,
     calculateReservedValue,
     setWalletsOrderBy,
   };

@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import DownloadData from "./download-data.vue";
 import UploadData from "./upload-data.vue";
+import DeleteData from "./delete-data.vue";
 </script>
 
 <template>
@@ -12,6 +13,7 @@ import UploadData from "./upload-data.vue";
     <v-list>
       <download-data />
       <upload-data />
+      <delete-data />
     </v-list>
   </v-menu>
 </template>
