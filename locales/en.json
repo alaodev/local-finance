@@ -21,6 +21,14 @@
             "total-equity-card": {
                 "title": "Total Equity",
                 "subtitle": "Sum of all categories"
+            },
+            "equity-category-card": {
+                "title": "Equity by category",
+                "subtitle": "Equity separated by category",
+                "equity-category-card-items": {
+                    "wallets": "Wallets",
+                    "cryptos": "Cryptos"
+                }
             }
         },
         "wallets": {

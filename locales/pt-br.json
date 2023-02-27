@@ -21,6 +21,14 @@
             "total-equity-card": {
                 "title": "Patrimônio total",
                 "subtitle": "Somatório de todas as categorias"
+            },
+            "equity-category-card": {
+                "title": "Patrimônio por categoria",
+                "subtitle": "Patrimônio separado por categoria",
+                "equity-category-card-items": {
+                    "wallets": "Carteiras",
+                    "cryptos": "Criptos"
+                }
             }
         },
         "wallets": {
