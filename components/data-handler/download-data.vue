@@ -1,12 +1,18 @@
 <script lang="ts" setup>
 const walletsStore = useWallets();
 const cryptosStore = useCryptos();
+const stocksStore = useStocks();
 
 const { wallets } = walletsStore;
 const { cryptos } = cryptosStore;
+const { stocks } = stocksStore;
 
 function download() {
-  const data = { wallets: Array.from(wallets), cryptos: Array.from(cryptos) };
+  const data = {
+    wallets: Array.from(wallets),
+    cryptos: Array.from(cryptos),
+    stocks: Array.from(stocks),
+  };
   const dataStr = `data:text/json;charset=utf-8,${encodeURIComponent(
     JSON.stringify(data)
   )}`;
