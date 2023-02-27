@@ -17,7 +17,12 @@
         }
     },
     "pages": {
-        "dashboard": {},
+        "dashboard": {
+            "total-equity-card": {
+                "title": "Patrimônio total",
+                "subtitle": "Somatório de todas as categorias"
+            }
+        },
         "wallets": {
             "index": {
                 "wallet-card": {

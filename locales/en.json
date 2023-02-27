@@ -17,7 +17,12 @@
         }
     },
     "pages": {
-        "dashboard": {},
+        "dashboard": {
+            "total-equity-card": {
+                "title": "Total Equity",
+                "subtitle": "Sum of all categories"
+            }
+        },
         "wallets": {
             "index": {
                 "wallet-card": {
