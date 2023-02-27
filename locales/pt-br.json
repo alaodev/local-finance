@@ -8,6 +8,9 @@
         },
         "cryptos": {
             "title": "Criptos"
+        },
+        "stocks": {
+            "title": "Ações"
         }
     },
     "appbar": {
@@ -108,6 +111,44 @@
                         }
                     }
                 }
+            }
+        },
+        "stocks": {
+            "index": {
+                "stock-card": {
+                    "menu": {
+                        "remove": "Remover"
+                    },
+                    "btn-group": {
+                        "deposit": {
+                            "title": "Depositar",
+                            "dialog": "Quanto depositar?"
+                        },
+                        "withdraw": {
+                            "title": "Retirar",
+                            "dialog": "Quanto retirar?"
+                        },
+                        "close": "Fechar"
+                    }
+                }
+            },
+            "list": {
+                "stock-list-card": {
+                    "title": "Lista de ações",
+                    "filter": "Procurar por nome",
+                    "list": {
+                        "name": "Nome",
+                        "price": "Preço",
+                        "menu": {
+                            "add-stock": "Adicionar ação"
+                        }
+                    }
+                }
+            },
+            "create": {
+                "title": "Adicionar ação",
+                "per-coin": "por moeda",
+                "btn-add": "Adicionar"
             }
         }
     },

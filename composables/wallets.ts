@@ -84,16 +84,13 @@ export const useWallets = defineStore("wallets", () => {
     value: number,
     operator: number
   ) {
-    const wallet = wallets.value.get(uuid);
+    const wallet = wallets.value.get(uuid) as WalletType;
     const transaction = createTransaction(operator, value);
-    return {
-      ...wallet,
-      reserved: (wallet?.reserved || 0) + value * operator,
-      transactions: [
-        ...(wallet?.transactions as Array<TransactionType>),
-        transaction,
-      ],
-    };
+    wallet.reserved = (wallet.reserved || 0) + value * operator;
+    wallet.transactions = [
+      ...(wallet.transactions as Array<TransactionType>),
+      transaction,
+    ];
   }
 
   function createTransaction(type: number, value: number): TransactionType {

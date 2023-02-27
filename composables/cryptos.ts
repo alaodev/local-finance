@@ -136,14 +136,11 @@ export const useCryptos = defineStore("cryptos", () => {
   function calculateReservedValue(id: string, value: number, operator: number) {
     const crypto = cryptos.value.get(id) as CryptoType;
     const transaction = createTransaction(operator, value);
-    return {
-      ...crypto,
-      amount: (crypto.amount || 0) + value * operator,
-      transactions: [
-        ...(crypto.transactions as Array<TransactionType>),
-        transaction,
-      ],
-    };
+    crypto.amount = (crypto.amount || 0) + value * operator;
+    crypto.transactions = [
+      ...(crypto.transactions as Array<TransactionType>),
+      transaction,
+    ];
   }
 
   function findCryptoById(cryptoId: string) {

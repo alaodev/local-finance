@@ -8,6 +8,9 @@
         },
         "cryptos": {
             "title": "Cryptos"
+        },
+        "stocks": {
+            "title": "Stocks"
         }
     },
     "appbar": {
@@ -108,6 +111,44 @@
                         }
                     }
                 }
+            }
+        },
+        "stocks": {
+            "index": {
+                "stock-card": {
+                    "menu": {
+                        "remove": "Remove"
+                    },
+                    "btn-group": {
+                        "deposit": {
+                            "title": "Deposit",
+                            "dialog": "How much to deposit?"
+                        },
+                        "withdraw": {
+                            "title": "Withdraw",
+                            "dialog": "How much withdraw?"
+                        },
+                        "close": "Close"
+                    }
+                }
+            },
+            "list": {
+                "stock-list-card": {
+                    "title": "Stock list",
+                    "filter": "Search by name",
+                    "list": {
+                        "name": "Name",
+                        "price": "Price",
+                        "menu": {
+                            "add-stock": "Add stock"
+                        }
+                    }
+                }
+            },
+            "create": {
+                "title": "Add stock",
+                "per-coin": "per coin",
+                "btn-add": "Add"
             }
         }
     },
