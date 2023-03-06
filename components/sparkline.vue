@@ -36,7 +36,7 @@ const chartData: Ref<ChartData> = ref({
       data,
       borderColor,
       borderWidth: 1,
-      tension: 0.5,
+      tension: 0,
     },
   ],
 });

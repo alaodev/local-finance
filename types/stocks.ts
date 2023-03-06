@@ -14,5 +14,6 @@ export type StockTableItemType = {
 export type StockType = {
   amount: number;
   createdAt?: number;
+  sparklineData?: Array<number>;
   transactions?: Array<TransactionType>;
 } & StockBaseType;

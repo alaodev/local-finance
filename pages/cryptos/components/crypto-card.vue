@@ -5,7 +5,6 @@ import { CryptoType } from "~~/types/cryptos";
 import PercentIndicator from "./percent-indicator.vue";
 import CryptoDialog from "./crypto-dialog.vue";
 import RemoveCrypto from "./remove-crypto.vue";
-import Sparkline from "./sparkline.vue";
 
 type Props = {
   crypto: CryptoType;

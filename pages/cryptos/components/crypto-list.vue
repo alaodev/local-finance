@@ -3,7 +3,6 @@ import { currencyNumber } from "~~/utils/formatters";
 
 import { CryptoTableItemType } from "~~/types/cryptos";
 
-import Sparkline from "./sparkline.vue";
 import PercentIndicator from "./percent-indicator.vue";
 
 type Props = {

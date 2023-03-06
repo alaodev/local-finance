@@ -62,6 +62,9 @@ const stockValue = computed(
               <span class="text-h5">{{
                 currencyNumber(stockValue, currency)
               }}</span>
+              <div class="card-sparkline">
+                <sparkline :data="props.stock?.sparklineData" />
+              </div>
             </v-col>
           </v-row>
         </v-sheet>

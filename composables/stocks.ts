@@ -96,15 +96,28 @@ export const useStocks = defineStore("stocks", () => {
       loadingStockTable.value = true;
       let currencyMultiplier = 1;
       if (currency.value !== "brl") {
-        const { data: conversionData }: any = await useFetch(
-          `https://brapi.dev/api/v2/currency?currency=BRL-${currency.value.toUpperCase()}`
-        );
-        currencyMultiplier = conversionData.value.currency[0].askPrice;
-        console.log(currencyMultiplier);
+        currencyMultiplier = await getCurrencyMultiplier(currency.value);
       }
-      const { data: stocksData }: any = await useFetch(
-        "https://brapi.dev/api/quote/list?sortBy=close&sortOrder=desc"
-      );
+      const stocksIds: Array<string> = [];
+      stocks.value.forEach((stock) => stocksIds.push(stock.id));
+      const [{ data: stocksData }, { data: infosData }]: Array<any> =
+        await Promise.all([
+          useFetch(
+            "https://brapi.dev/api/quote/list?sortBy=close&sortOrder=desc"
+          ),
+          useFetch(
+            `https://brapi.dev/api/quote/${stocksIds.join(
+              ","
+            )}?range=1y&interval=1d&fundamental=false&dividends=false`
+          ),
+        ]);
+
+      infosData.value.results.forEach((info: any) => {
+        const stock = stocks.value.get(info.symbol) as StockType;
+        stock.sparklineData = info.historicalDataPrice.map(
+          (data: any) => data.close
+        );
+      });
       for (let item of stocksData.value.stocks) {
         const newStockTableItem = {
           id: item.stock,
@@ -168,6 +181,13 @@ export const useStocks = defineStore("stocks", () => {
 
   function setStockListOrderBy(value: string) {
     stockListOrderBy.value = value;
+  }
+
+  async function getCurrencyMultiplier(currencyCode: string) {
+    const { data: conversionData }: any = await useFetch(
+      `https://brapi.dev/api/v2/currency?currency=BRL-${currencyCode.toUpperCase()}`
+    );
+    return conversionData.value.currency[0].askPrice;
   }
 
   watch(currency, async () => await loadStockTable(true), { immediate: true });
